@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\CarRent\\CarRent.csproj": {}
+    "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\CarRent.csproj": {}
   },
   "projects": {
-    "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\CarRent\\CarRent.csproj": {
+    "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\CarRent.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\CarRent\\CarRent.csproj",
+        "projectUniqueName": "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\CarRent.csproj",
         "projectName": "CarRent",
-        "projectPath": "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\CarRent\\CarRent.csproj",
+        "projectPath": "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\CarRent.csproj",
         "packagesPath": "C:\\Users\\gunes\\.nuget\\packages\\",
-        "outputPath": "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\CarRent\\obj\\",
+        "outputPath": "D:\\Folders\\Videos\\Lessons\\Web Programlama\\web-programlama-proje\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gunes\\AppData\\Roaming\\NuGet\\NuGet.Config",

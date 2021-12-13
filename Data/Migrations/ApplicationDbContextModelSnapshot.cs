@@ -95,7 +95,7 @@ namespace CarRent.Data.Migrations
                     b.Property<double>("CarDepositPrice")
                         .HasColumnType("float");
 
-                    b.Property<int>("CarGearboxType")
+                    b.Property<int>("CarDoors")
                         .HasColumnType("int");
 
                     b.Property<string>("CarImageUrl")
@@ -113,6 +113,12 @@ namespace CarRent.Data.Migrations
 
                     b.Property<double>("CarRentPrice")
                         .HasColumnType("float");
+
+                    b.Property<int>("CarSeats")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarTransmissionType")
+                        .HasColumnType("int");
 
                     b.Property<string>("CarTrimPackage")
                         .IsRequired()

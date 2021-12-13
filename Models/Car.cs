@@ -29,6 +29,16 @@ namespace CarRent.Models
         public string CarTrimPackage { get; set; }
 
         [Required]
+        [Display(Name = "Seats")]
+        [Range(1, 100)]
+        public int CarSeats { get; set; }
+
+        [Required]
+        [Display(Name = "Doors")]
+        [Range(1, 10)]
+        public int CarDoors { get; set; }
+
+        [Required]
         [Display(Name = "Color")]
         public string CarColor { get; set; }
 
@@ -56,7 +66,7 @@ namespace CarRent.Models
 
         [Required]
         [Display(Name = "Gearbox")]
-        public CarGearboxType CarGearboxType { get; set; }
+        public CarTransmissionType CarTransmissionType { get; set; }
 
         public int EngineId { get; set; }
 
@@ -84,7 +94,7 @@ namespace CarRent.Models
         SportsCar
     }
 
-    public enum CarGearboxType
+    public enum CarTransmissionType
     {
         Manual,
         Automatic,
