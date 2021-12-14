@@ -66,10 +66,10 @@
                                 <li><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
                                 <li><a asp-controller="Home" asp-action="Privacy" class="nav-link">Privacy</a></li>
                                 <partial name="_LoginPartial" />
-                                @*@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                                {*@
+                                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                {
                                     <li><a asp-controller="Admin" asp-action="Index" class="nav-link">Admin</a></li>
-                                @*}*@
+                                }
                                 </ul>
                         </nav>
                     </div>

@@ -64,7 +64,6 @@ namespace CarRent.Areas.Identity.Pages.Account
             [Display(Name = "Phone")]
             public string Phone { get; set; }
 
-            [Required]
             [Display(Name = "Address")]
             public Address Address { get; set; }
 
@@ -92,11 +91,16 @@ namespace CarRent.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new UserDetails { UserName = Input.Email, Email = Input.Email };
+                var user = new UserDetails { UserName = Input.Email, Email = Input.Email, Name = Input.Name, Surname = Input.Surname, PhoneNumber = Input.Phone };
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    user.UserStatistics = new UserStatisticDetails() { NumberOfRent = 0, TotalRentTime = 0, YearOfRegister = DateTime.Now.Year, Id = user.Id, User = user};
+
+                    await _userManager.AddToRoleAsync(user, "User");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

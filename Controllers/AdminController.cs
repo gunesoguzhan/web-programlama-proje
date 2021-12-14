@@ -7,35 +7,10 @@ using System.Threading.Tasks;
 
 namespace CarRent.Controllers
 {
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult User()
-        {
-            return View();
-        }
-
-        public IActionResult Car()
-        {
-            return View();
-        }
-
-        public IActionResult Office()
-        {
-            return View();
-        }
-
-        public IActionResult Address()
-        {
-            return View();
-        }
-
-        public IActionResult Campaign()
         {
             return View();
         }

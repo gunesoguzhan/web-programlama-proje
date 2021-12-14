@@ -16,7 +16,7 @@ namespace CarRent.Models
 
         public double TotalPrice { get; set; }
 
-        public string UserId { get; set; }
+        public string Id { get; set; }
 
         public int? CarId { get; set; }
 

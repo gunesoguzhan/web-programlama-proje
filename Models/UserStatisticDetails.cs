@@ -24,7 +24,7 @@ namespace CarRent.Models
         [Display(Name = "Register year")]
         public int YearOfRegister { get; set; }
 
-        public string UserId { get; set; }
+        public string Id { get; set; }
 
         [ForeignKey("Id")]
         public UserDetails User { get; set; }

@@ -18,12 +18,7 @@ namespace CarRent.Models
         [Display(Name = "User surname")]
         public string Surname { get; set; }
 
-        [Required]
-        [Display(Name = "User Phone Number")]
-        [Phone(ErrorMessage = "The phone number does not conform to the format.")]
-        public string UserPhoneNumber { get; set; }
-
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
 
         [ForeignKey("AddressId")]
         public Address Address { get; set; }
