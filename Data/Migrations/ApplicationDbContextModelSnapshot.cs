@@ -16,7 +16,7 @@ namespace CarRent.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CarRent.Models.Address", b =>
@@ -217,6 +217,10 @@ namespace CarRent.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("OfficeEmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OfficeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -1,0 +1,48 @@
+﻿@model CarRent.Models.District
+
+@{
+    ViewData["Title"] = "Add A District";
+}
+
+<div class="site-section bg-light padding-top-200px" id="contact-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-7 text-center mb-5">
+                <h2>Add A New District</h2>
+            </div>
+        </div>
+        <div class="d-flex action mb-5">
+            <a asp-action="Index" class="btn btn-primary">Go back to list</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mb-5">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="DistrictName" class="control-label"></label>
+                            <input asp-for="DistrictName" class="form-control" />
+                            <span asp-validation-for="DistrictName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="ProvinceId" class="control-label"></label>
+                            <a asp-action="Create" asp-controller="Province" class="btn btn-primary float-right">Add a new province</a>
+                            <select asp-for="ProvinceId" class="form-control" asp-items="ViewBag.ProvinceId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6 mr-auto">
+                            <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Add">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

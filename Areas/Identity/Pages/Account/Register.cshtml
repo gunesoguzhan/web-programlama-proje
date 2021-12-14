@@ -1,0 +1,80 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="site-section bg-light padding-top-200px" id="contact-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-7 text-center mb-5">
+                <h2>@ViewData["Title"]</h2>
+                <h4>Create a new account.</h4>
+            </div>
+        </div>
+        <div class="d-flex action mb-5">
+            <h4>Already have an account?</h4>
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn-link ml-3">Log In</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mb-5">
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group row">
+                        <div class="col-md-6 mb-4 mb-lg-0">
+                            <label asp-for="Input.Name"></label>
+                            <input asp-for="Input.Name" class="form-control" />
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-4 mb-lg-0">
+                            <label asp-for="Input.Surname"></label>
+                            <input asp-for="Input.Surname" class="form-control" />
+                            <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="Input.Phone"></label>
+                            <input asp-for="Input.Phone" class="form-control" />
+                            <span asp-validation-for="Input.Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="Input.Address.AddressId"></label>
+                            <select asp-for="Input.Address.AddressId" class="form-control" asp-items="ViewBag.AddressId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6 mb-4 mb-lg-0">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-4 mb-lg-0">
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6 mr-auto">
+                            <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Register">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,61 @@
+﻿@model CarRent.Models.District
+
+@{
+    ViewData["Title"] = "Edit The District";
+}
+
+<div class="site-section bg-light padding-top-200px" id="contact-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-7 text-center mb-5">
+                <h2>Edit The District</h2>
+            </div>
+        </div>
+        <div class="d-flex action mb-5">
+            <a asp-action="Index" class="btn btn-primary">Go Back To List</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mb-5">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="DistrictId" />
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="DistrictName" class="control-label"></label>
+                            <input asp-for="DistrictName" class="form-control" />
+                            <span asp-validation-for="DistrictName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="ProvinceId" class="control-label"></label>
+                            <a asp-action="Create" asp-controller="Province" class="btn btn-primary float-right">Add a new province</a>
+
+                            <select asp-for="ProvinceId" class="form-control" asp-items="ViewBag.ProvinceId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6 mr-auto">
+                            <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Update">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4 ml-auto">
+                <div class="bg-white p-3 p-md-5">
+                    <h3 class="text-black mb-4">Current Values</h3>
+                    <ul class="list-unstyled footer-link">
+                        <li class="d-block mb-3">
+                            <span class="d-block text-black">@Html.DisplayNameFor(model => model.DistrictName)</span>
+                            <span>@Model.DistrictName</span>
+                        </li>
+                        <li class="d-block mb-3"><span class="d-block text-black">@Html.DisplayNameFor(model => model.Province.ProvinceName) </span><span>@Model.Province.ProvinceName</span></li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

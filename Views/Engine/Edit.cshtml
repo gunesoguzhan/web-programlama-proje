@@ -1,0 +1,86 @@
+﻿@model CarRent.Models.Engine
+
+@{
+    ViewData["Title"] = "Edit The Engine";
+}
+
+<div class="site-section bg-light padding-top-200px" id="contact-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-7 text-center mb-5">
+                <h2>Edit The Engine</h2>
+            </div>
+        </div>
+        <div class="d-flex action mb-5">
+            <a asp-action="Index" class="btn btn-primary">Go Back To List</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mb-5">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="EngineId" />
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="EngineName" class="control-label"></label>
+                            <input asp-for="EngineName" class="form-control" />
+                            <span asp-validation-for="EngineName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="EngineVolume" class="control-label"></label>
+                            <input asp-for="EngineVolume" class="form-control" />
+                            <span asp-validation-for="EngineVolume" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="EngineHorsePower" class="control-label"></label>
+                            <input asp-for="EngineHorsePower" class="form-control" />
+                            <span asp-validation-for="EngineHorsePower" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="EngineFuelType" class="control-label"></label>
+                            <select asp-for="EngineFuelType" class="form-control" asp-items="@Html.GetEnumSelectList<EngineFuelType>()"></select>
+                            <span asp-validation-for="EngineFuelType" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6 mr-auto">
+                            <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Update">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4 ml-auto">
+                <div class="bg-white p-3 p-md-5">
+                    <h3 class="text-black mb-4">Current Values</h3>
+                    <ul class="list-unstyled footer-link">
+                        <li class="d-block mb-3">
+                            <span class="d-block text-black">@Html.DisplayNameFor(model => model.EngineName)</span>
+                            <span>@Model.EngineName</span>
+                        </li>
+                        <li class="d-block mb-3">
+                            <span class="d-block text-black">@Html.DisplayNameFor(model => model.EngineVolume)</span>
+                            <span>@Model.EngineVolume</span>
+                        </li>
+                        <li class="d-block mb-3">
+                            <span class="d-block text-black">@Html.DisplayNameFor(model => model.EngineHorsePower)</span>
+                            <span>@Model.EngineHorsePower</span>
+                        </li>
+                        <li class="d-block mb-3">
+                            <span class="d-block text-black">@Html.DisplayNameFor(model => model.EngineFuelType)</span>
+                            <span>@Model.EngineFuelType</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

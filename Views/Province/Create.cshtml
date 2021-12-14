@@ -1,0 +1,55 @@
+﻿@model CarRent.Models.Province
+
+@{
+    ViewData["Title"] = "Add A Province";
+}
+
+<div class="site-section bg-light padding-top-200px" id="contact-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-7 text-center mb-5">
+                <h2>Add A New Province</h2>
+            </div>
+        </div>
+        <div class="d-flex action mb-5">
+            <a asp-action="Index" class="btn btn-primary">Go back to list</a>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mb-5">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="ProvinceId" class="control-label"></label>
+                            <input asp-for="ProvinceId" class="form-control" />
+                            <span asp-validation-for="ProvinceId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="ProvinceName" class="control-label"></label>
+                            <input asp-for="ProvinceName" class="form-control" />
+                            <span asp-validation-for="ProvinceName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12 mb-4 mb-lg-0">
+                            <label asp-for="CountryId" class="control-label"></label>
+                            <a asp-action="Create" asp-controller="Country" class="btn btn-primary float-right">Add a new country</a>
+                            <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6 mr-auto">
+                            <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Add">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

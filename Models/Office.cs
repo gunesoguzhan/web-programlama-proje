@@ -13,6 +13,10 @@ namespace CarRent.Models
         public int OfficeId { get; set; }
 
         [Required]
+        [Display(Name = "Office Name")]
+        public string OfficeName { get; set; }
+
+        [Required]
         [Display(Name = "Office Phone Number")]
         [Phone(ErrorMessage = "The phone number does not conform to the format.")]
         public string OfficePhone { get; set; }
