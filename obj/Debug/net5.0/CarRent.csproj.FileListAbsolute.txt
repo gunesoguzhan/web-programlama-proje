@@ -153,7 +153,6 @@ D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\CarRent.RazorCoreGenerate.cache
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -278,3 +277,4 @@ D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Office\Edit.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Office\Index.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Car\List.cshtml.g.cs

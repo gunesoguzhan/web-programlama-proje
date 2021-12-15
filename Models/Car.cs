@@ -62,6 +62,11 @@ namespace CarRent.Models
         [Range(0, double.MaxValue)]
         public double CarDepositPrice { get; set; }
 
+        [Required]
+        [Display(Name = "Minimum Age")]
+        [Range(0, int.MaxValue)]
+        public int MinimumAge { get; set; }
+
         public string CarImageUrl { get; set; }
 
         [Required]

@@ -29,7 +29,15 @@ namespace CarRent.Controllers
         // GET: Address/Create
         public IActionResult Create()
         {
-            ViewData["DistrictId"] = new SelectList(_context.Districts, "DistrictId", "DistrictName");
+            var provinceDistrict = (from province in _context.Provinces
+                                    from district in _context.Districts
+                                    where province.ProvinceId == district.ProvinceId
+                                    select new
+                                    {
+                                        DistrictId = district.DistrictId,
+                                        ProvinceDistrict = province.ProvinceName + " - " + district.DistrictName
+                                    }).ToList();
+            ViewData["DistrictId"] = new SelectList(provinceDistrict, "DistrictId", "ProvinceDistrict");
             return View();
         }
 
@@ -46,7 +54,15 @@ namespace CarRent.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DistrictId"] = new SelectList(_context.Districts, "DistrictId", "DistrictName", address.DistrictId);
+            var provinceDistrict = (from province in _context.Provinces
+                                    from district in _context.Districts
+                                    where province.ProvinceId == district.ProvinceId
+                                    select new
+                                    {
+                                        DistrictId = district.DistrictId,
+                                        ProvinceDistrict = province.ProvinceName + " - " + district.DistrictName
+                                    }).ToList();
+            ViewData["DistrictId"] = new SelectList(provinceDistrict, "DistrictId", "ProvinceDistrict");
             return View(address);
         }
 
@@ -63,7 +79,15 @@ namespace CarRent.Controllers
             {
                 return NotFound();
             }
-            ViewData["DistrictId"] = new SelectList(_context.Districts, "DistrictId", "DistrictName", address.DistrictId);
+            var provinceDistrict = (from province in _context.Provinces
+                                    from district in _context.Districts
+                                    where province.ProvinceId == district.ProvinceId
+                                    select new
+                                    {
+                                        DistrictId = district.DistrictId,
+                                        ProvinceDistrict = province.ProvinceName + " - " + district.DistrictName
+                                    }).ToList();
+            ViewData["DistrictId"] = new SelectList(provinceDistrict, "DistrictId", "ProvinceDistrict");
             return View(address);
         }
 
@@ -99,7 +123,15 @@ namespace CarRent.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DistrictId"] = new SelectList(_context.Districts, "DistrictId", "DistrictName", address.DistrictId);
+            var provinceDistrict = (from province in _context.Provinces
+                                    from district in _context.Districts
+                                    where province.ProvinceId == district.ProvinceId
+                                    select new
+                                    {
+                                        DistrictId = district.DistrictId,
+                                        ProvinceDistrict = province.ProvinceName + " - " + district.DistrictName
+                                    }).ToList();
+            ViewData["DistrictId"] = new SelectList(provinceDistrict, "DistrictId", "ProvinceDistrict");
             return View(address);
         }
 

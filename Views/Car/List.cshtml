@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CarRent.Models.Car>
+
+@{
+    ViewData["Title"] = "Our Cars For You";
+}
+
+<div class="site-section bg-light padding-top-200px">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="item-1">
+                        <a href="#"><img src="@item.CarImageUrl" alt="Image" class="img-fluid"></a>
+                        <div class="item-1-contents">
+                            <div class="text-center">
+                                <h3><a href="#">@item.CarBrand @item.CarModel</a></h3>
+                                <div class="rent-price"><span>$@item.CarRentPrice/</span>day</div>
+                            </div>
+                            <ul class="specs">
+                                <li>
+                                    <span>Engine</span>
+                                    <span class="spec">@item.Engine.EngineHorsePower hp @item.Engine.EngineVolume cm³</span>
+                                </li>
+                                <li>
+                                    <span>Fuel</span>
+                                    <span class="spec">@item.Engine.EngineFuelType</span>
+                                </li>
+                                <li>
+                                    <span>Transmission</span>
+                                    <span class="spec">@item.CarTransmissionType</span>
+                                </li>
+                                <li>
+                                    <span>Minium age</span>
+                                    <span class="spec">@item.MinimumAge</span>
+                                </li>
+                            </ul>
+                            <div class="d-flex action">
+                                <a href="contact.html" class="btn btn-primary">Rent Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</div>

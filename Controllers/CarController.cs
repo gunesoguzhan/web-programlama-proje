@@ -50,7 +50,7 @@ namespace CarRent.Controllers
         public IActionResult Create()
         {
             ViewData["EngineId"] = new SelectList(_context.Engines, "EngineId", "EngineName");
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName");
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeEmailAddress");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace CarRent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,CarImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
+        public async Task<IActionResult> Create([Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace CarRent.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EngineId"] = new SelectList(_context.Engines, "EngineId", "EngineName", car.EngineId);
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName", car.OfficeId);
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeEmailAddress", car.OfficeId);
             return View(car);
         }
 
@@ -86,7 +86,7 @@ namespace CarRent.Controllers
                 return NotFound();
             }
             ViewData["EngineId"] = new SelectList(_context.Engines, "EngineId", "EngineName", car.EngineId);
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName", car.OfficeId);
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeEmailAddress", car.OfficeId);
             return View(car);
         }
 
@@ -95,7 +95,7 @@ namespace CarRent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,CarImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
         {
             if (id != car.CarId)
             {
@@ -123,7 +123,7 @@ namespace CarRent.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EngineId"] = new SelectList(_context.Engines, "EngineId", "EngineName", car.EngineId);
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName", car.OfficeId);
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeEmailAddress", car.OfficeId);
             return View(car);
         }
 
@@ -161,6 +161,29 @@ namespace CarRent.Controllers
         private bool CarExists(int id)
         {
             return _context.Cars.Any(e => e.CarId == id);
+        }
+
+        [HttpGet]
+        public IActionResult List()
+        {
+            string rentP = HttpContext.Request.Query["RentPlace"].ToString();
+            string returnP = HttpContext.Request.Query["ReturnPlace"].ToString();
+            string rentD = HttpContext.Request.Query["RentDate"].ToString();
+            string returnD = HttpContext.Request.Query["ReturnDate"].ToString();
+
+            if (string.IsNullOrEmpty(rentP) || string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(rentD) || string.IsNullOrEmpty(returnD))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            int rentPlace = Convert.ToInt32(rentP);
+            int returnPlace = Convert.ToInt32(returnP);
+            DateTime rentDate = DateTime.ParseExact(rentD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime returnDate = DateTime.ParseExact(returnD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
+
+            var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office).Where(x => x.OfficeId == rentPlace);
+
+            return View(cars);
         }
     }
 }

@@ -48,7 +48,7 @@ namespace CarRent.Controllers
         // GET: Office/Create
         public IActionResult Create()
         {
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressText");
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressTitle");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace CarRent.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressText", office.AddressId);
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressTitle", office.AddressId);
             return View(office);
         }
 
@@ -82,7 +82,7 @@ namespace CarRent.Controllers
             {
                 return NotFound();
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressText", office.AddressId);
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressTitle", office.AddressId);
             return View(office);
         }
 
@@ -118,7 +118,7 @@ namespace CarRent.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressText", office.AddressId);
+            ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressTitle", office.AddressId);
             return View(office);
         }
 
