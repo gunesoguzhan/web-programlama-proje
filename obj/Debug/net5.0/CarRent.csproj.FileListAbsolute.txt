@@ -278,3 +278,12 @@ D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Office\Index.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Car\List.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\RentDetails\Create.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\RentDetails\Delete.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\RentDetails\Details.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\RentDetails\Edit.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\RentDetails\Index.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\RentDetails\Details2.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\RentDetails\FastRent.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Car\ListAdmin.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Office\ListAdmin.cshtml.g.cs

@@ -69,6 +69,8 @@ namespace CarRent.Models
 
         public string CarImageUrl { get; set; }
 
+        public string CarCoverImageUrl { get; set; }
+
         [Required]
         [Display(Name = "Gearbox")]
         public CarTransmissionType CarTransmissionType { get; set; }

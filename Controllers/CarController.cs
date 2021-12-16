@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarRent.Data;
 using CarRent.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarRent.Controllers
 {
@@ -22,11 +24,19 @@ namespace CarRent.Controllers
         // GET: Car
         public async Task<IActionResult> Index()
         {
+            var applicationDbContext = _context.Cars.Include(c => c.Engine).Include(c => c.Office.Address.District.Province);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ListAdmin()
+        {
             var applicationDbContext = _context.Cars.Include(c => c.Engine).Include(c => c.Office);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Car/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +57,7 @@ namespace CarRent.Controllers
         }
 
         // GET: Car/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["EngineId"] = new SelectList(_context.Engines, "EngineId", "EngineName");
@@ -59,13 +70,13 @@ namespace CarRent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
+        public async Task<IActionResult> Create([Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl, CarCoverImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(car);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListAdmin));
             }
             ViewData["EngineId"] = new SelectList(_context.Engines, "EngineId", "EngineName", car.EngineId);
             ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeEmailAddress", car.OfficeId);
@@ -73,6 +84,7 @@ namespace CarRent.Controllers
         }
 
         // GET: Car/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,7 +107,7 @@ namespace CarRent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl, CarCoverImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
         {
             if (id != car.CarId)
             {
@@ -120,7 +132,7 @@ namespace CarRent.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListAdmin));
             }
             ViewData["EngineId"] = new SelectList(_context.Engines, "EngineId", "EngineName", car.EngineId);
             ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeEmailAddress", car.OfficeId);
@@ -128,6 +140,7 @@ namespace CarRent.Controllers
         }
 
         // GET: Car/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,7 +168,7 @@ namespace CarRent.Controllers
             var car = await _context.Cars.FindAsync(id);
             _context.Cars.Remove(car);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ListAdmin));
         }
 
         private bool CarExists(int id)
@@ -163,15 +176,15 @@ namespace CarRent.Controllers
             return _context.Cars.Any(e => e.CarId == id);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult List()
         {
-            string rentP = HttpContext.Request.Query["RentPlace"].ToString();
-            string returnP = HttpContext.Request.Query["ReturnPlace"].ToString();
-            string rentD = HttpContext.Request.Query["RentDate"].ToString();
-            string returnD = HttpContext.Request.Query["ReturnDate"].ToString();
+            string rentP = HttpContext.Request.Form["RentPlace"].ToString();
+            string returnP = HttpContext.Request.Form["ReturnPlace"].ToString();
+            string rentD = HttpContext.Request.Form["RentDate"].ToString();
+            string returnD = HttpContext.Request.Form["ReturnDate"].ToString();
 
-            if (string.IsNullOrEmpty(rentP) || string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(rentD) || string.IsNullOrEmpty(returnD))
+            if(string.IsNullOrEmpty(rentP) || string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(rentD) || string.IsNullOrEmpty(returnD))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -181,8 +194,13 @@ namespace CarRent.Controllers
             DateTime rentDate = DateTime.ParseExact(rentD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
             DateTime returnDate = DateTime.ParseExact(returnD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
 
-            var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office).Where(x => x.OfficeId == rentPlace);
+            var rentOffice = _context.Offices.Include(x => x.Address.District.Province).Where(x => x.OfficeId == rentPlace).FirstOrDefault();
+            var returnOffice = _context.Offices.Include(x => x.Address.District.Province).Where(x => x.OfficeId == returnPlace).FirstOrDefault();
 
+            HttpContext.Session.SetObject("RentOffice", rentOffice);
+            HttpContext.Session.SetObject("ReturnOffice", returnOffice);
+
+            var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office).Where(x => x.OfficeId == rentPlace);
             return View(cars);
         }
     }

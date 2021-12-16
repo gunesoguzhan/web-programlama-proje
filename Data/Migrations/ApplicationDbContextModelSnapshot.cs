@@ -92,6 +92,9 @@ namespace CarRent.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CarCoverImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("CarDepositPrice")
                         .HasColumnType("float");
 

@@ -1,5 +1,5 @@
-﻿.padding-top-200px{
-    padding-top: 200px;
+﻿.padding-top-120px{
+    padding-top: 120px;
 }
 
 .spec2 {
@@ -8,4 +8,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: right;
+}
+
+.carrent-border-top {
+    border: none;
+    border-top: 8px solid #00C1B4;
+    border-radius: 0;
+}
+
+.carrent-border-bottom {
+    border: none;
+    border-bottom: 1px solid #EFEFEF;
+    border-radius: 0px;
 }

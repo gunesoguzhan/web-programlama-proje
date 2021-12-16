@@ -4,18 +4,31 @@
     ViewData["Title"] = "Our Cars For You";
 }
 
-<div class="site-section bg-light padding-top-200px">
+<div class="ftco-blocks-cover-1">
+    <div class="ftco-cover-1 overlay innerpage" style="background-image: url('/img/cars.jpg')">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h1>Our Cars For You</h1>
+                    <p>We list our suitable cars for you.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section bg-light">
     <div class="container">
         <div class="row">
             @foreach (var item in Model)
             {
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="item-1">
-                        <a href="#"><img src="@item.CarImageUrl" alt="Image" class="img-fluid"></a>
+                        <img src="@item.CarImageUrl" alt="Image" class="img-fluid bg-white">
                         <div class="item-1-contents">
                             <div class="text-center">
-                                <h3><a href="#">@item.CarBrand @item.CarModel</a></h3>
-                                <div class="rent-price"><span>$@item.CarRentPrice/</span>day</div>
+                                <h3>@item.CarBrand @item.CarModel</h3>
+                                <div class="rent-price"><span>@item.CarRentPrice₺/</span>day</div>
                             </div>
                             <ul class="specs">
                                 <li>
@@ -36,7 +49,7 @@
                                 </li>
                             </ul>
                             <div class="d-flex action">
-                                <a href="contact.html" class="btn btn-primary">Rent Now</a>
+                                <a asp-action="Details2" asp-controller="RentDetails" asp-route-id="@item.CarId" class="btn btn-primary">Rent Now</a>
                             </div>
                         </div>
                     </div>

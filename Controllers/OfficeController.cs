@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarRent.Data;
 using CarRent.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarRent.Controllers
 {
@@ -45,7 +46,9 @@ namespace CarRent.Controllers
             return View(office);
         }
 
+
         // GET: Office/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressTitle");
@@ -63,13 +66,14 @@ namespace CarRent.Controllers
             {
                 _context.Add(office);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListAdmin));
             }
             ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressTitle", office.AddressId);
             return View(office);
         }
 
         // GET: Office/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -116,13 +120,14 @@ namespace CarRent.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListAdmin));
             }
             ViewData["AddressId"] = new SelectList(_context.Addresses, "AddressId", "AddressTitle", office.AddressId);
             return View(office);
         }
 
         // GET: Office/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,12 +154,19 @@ namespace CarRent.Controllers
             var office = await _context.Offices.FindAsync(id);
             _context.Offices.Remove(office);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ListAdmin));
         }
 
         private bool OfficeExists(int id)
         {
             return _context.Offices.Any(e => e.OfficeId == id);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ListAdmin()
+        {
+            var applicationDbContext = _context.Offices.Include(o => o.Address);
+            return View(await applicationDbContext.ToListAsync());
         }
     }
 }

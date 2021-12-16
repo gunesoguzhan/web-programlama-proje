@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Http
+@using CarRent.Models
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    Car car = HttpContextAccessor.HttpContext.Session.GetObject<Car>("RentCar");
+}
+
+<div class="ftco-blocks-cover-1">
+    <div class="ftco-cover-1" style="background-image: url(@Url.Content(car.CarCoverImageUrl));">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="feature-car-rent-box-1">
+                        <h3>@car.CarBrand @car.CarModel</h3>
+                        <ul class="list-unstyled">
+                            <li>
+                                <span>Office</span>
+                                <span class="spec">@car.Office.Address.District.Province.ProvinceName - @car.Office.Address.District.DistrictName</span>
+                            </li>
+                            <li>
+                                <span>Engine</span>
+                                <span class="spec">@car.Engine.EngineHorsePower hp @car.Engine.EngineVolume cm³</span>
+                            </li>
+                            <li>
+                                <span>Fuel</span>
+                                <span class="spec">@car.Engine.EngineFuelType</span>
+                            </li>
+                            <li>
+                                <span>Transmission</span>
+                                <span class="spec">@car.CarTransmissionType</span>
+                            </li>
+                            <li>
+                                <span>Minium age</span>
+                                <span class="spec">@car.MinimumAge</span>
+                            </li>
+                        </ul>
+                        <div class="d-flex align-items-center bg-light p-3">
+                            <span>@car.CarRentPrice₺/day</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section pt-0 pb-0 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <form class="trip-form" method="post" asp-action="List" asp-controller="Car">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-6">
+                            <h3 class="m-0">Begin your trip here</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="cf-1">Where you from</label>
+                            <select type="text" id="cf-1" name="RentPlace" asp-items="ViewBag.ProvinceDistrict" class="form-control" required>
+                                <option value="">Your pickup address</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cf-2">Where you go</label>
+                            <select type="text" id="cf-2" name="ReturnPlace" class="form-control" asp-items="ViewBag.ProvinceDistrict" required>
+                                <option value="">Your drop-off address</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cf-3">Journey date</label>
+                            <input type="datetime-local" id="cf-3" name="RentDate" placeholder="Your pickup address" class="form-control px-3" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cf-4">Return date</label>
+                            <input type="datetime-local" id="cf-4" name="ReturnDate" placeholder="Your pickup address" class="form-control px-3" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="submit" value="Begin Trip" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

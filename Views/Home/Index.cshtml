@@ -4,8 +4,8 @@
     ViewData["Title"] = "Welcome";
 }
 
-<div class="ftco-blocks-cover-1">
-    <div class="ftco-cover-1 overlay asdf">
+<div class="ftco-blocks-cover-1" >
+    <div class="ftco-cover-1" style="background-image: url(@Url.Content(Model.First().CarCoverImageUrl));">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -34,8 +34,8 @@
                             </li>
                         </ul>
                         <div class="d-flex align-items-center bg-light p-3">
-                            <span>$@Model.First().CarRentPrice/day</span>
-                            <a href="contact.html" class="ml-auto btn btn-primary">Rent Now</a>
+                            <span>@Model.First().CarRentPrice₺/day</span>
+                            <a asp-action="FastRent" asp-controller="RentDetails" asp-route-id="@Model.First().CarId" class="ml-auto btn btn-primary">Rent Now</a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
         <div class="row">
             <div class="col-12">
 
-                <form class="trip-form" method="get" asp-action="List" asp-controller="Car">
+                <form class="trip-form" method="post" asp-action="List" asp-controller="Car">
                     <div class="row align-items-center mb-4">
                         <div class="col-md-6">
                             <h3 class="m-0">Begin your trip here</h3>
@@ -58,23 +58,23 @@
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label for="cf-1">Where you from</label>
-                            <select type="text" id="cf-1" name="RentPlace" asp-items="ViewBag.ProvinceDistrict" class="form-control">
+                            <select type="text" id="cf-1" name="RentPlace" asp-items="ViewBag.ProvinceDistrict" class="form-control" required>
                                 <option value="">Your pickup address</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="cf-2">Where you go</label>
-                            <select type="text" id="cf-2" name="ReturnPlace" class="form-control" asp-items="ViewBag.ProvinceDistrict">
+                            <select type="text" id="cf-2" name="ReturnPlace" class="form-control" asp-items="ViewBag.ProvinceDistrict" required>
                                 <option value="">Your drop-off address</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="cf-3">Journey date</label>
-                            <input type="datetime-local" id="cf-3" name="RentDate" data-date-format="DD MM YYYY" placeholder="Your pickup address" class="form-control">
+                            <input type="datetime-local" id="cf-3" name="RentDate" placeholder="Your pickup address" class="form-control px-3" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="cf-4">Return date</label>
-                            <input type="datetime-local" id="cf-4" name="ReturnDate" data-date-format="DD MM YYYY" placeholder="Your pickup address" class="form-control">
+                            <input type="datetime-local" id="cf-4" name="ReturnDate" placeholder="Your pickup address" class="form-control px-3" required>
                         </div>
                     </div>
                     <div class="row">
@@ -107,11 +107,11 @@
                     @foreach (var item in Model)
                     {
                         <div class="item-1">
-                            <a href="#"><img src="@item.CarImageUrl" alt="Image" class="img-fluid"></a>
+                            <img src="@item.CarImageUrl" alt="Image" class="img-fluid bg-white">
                             <div class="item-1-contents">
                                 <div class="text-center">
-                                    <h3><a href="#">@item.CarBrand @item.CarModel</a></h3>
-                                    <div class="rent-price"><span>$@item.CarRentPrice/</span>day</div>
+                                    <h3>@item.CarBrand @item.CarModel</h3>
+                                    <div class="rent-price"><span>@item.CarRentPrice₺/</span>day</div>
                                 </div>
                                 <ul class="specs">
                                     <li>
@@ -132,7 +132,7 @@
                                     </li>
                                 </ul>
                                 <div class="d-flex action">
-                                    <a href="contact.html" class="btn btn-primary">Rent Now</a>
+                                    <a asp-action="FastRent" asp-controller="RentDetails" asp-route-id="@item.CarId" class="btn btn-primary">Rent Now</a>
                                 </div>
                             </div>
                         </div>
