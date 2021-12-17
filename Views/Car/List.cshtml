@@ -28,7 +28,7 @@
                         <div class="item-1-contents">
                             <div class="text-center">
                                 <h3>@item.CarBrand @item.CarModel</h3>
-                                <div class="rent-price"><span>@item.CarRentPrice₺/</span>day</div>
+                                <div class="rent-price"><span>@item.CarRentPrice ₺/</span>day</div>
                             </div>
                             <ul class="specs">
                                 <li>
@@ -49,7 +49,7 @@
                                 </li>
                             </ul>
                             <div class="d-flex action">
-                                <a asp-action="Details2" asp-controller="RentDetails" asp-route-id="@item.CarId" class="btn btn-primary">Rent Now</a>
+                                <a asp-action="Reserve" asp-controller="Reservation" asp-route-id="@item.CarId" class="btn btn-primary">Rent Now</a>
                             </div>
                         </div>
                     </div>

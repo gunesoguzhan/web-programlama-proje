@@ -1,0 +1,88 @@
+﻿@model CarRent.Models.Reservation
+
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+
+<div class="padding-top-120px bg-dark"></div>
+
+<div class="site-section bg-light padding-top-120px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="item-1">
+                    <img src="@Model.Car.CarImageUrl" alt="Image" class="img-fluid bg-white">
+                    <div class="item-1-contents">
+                        <div class="text-center">
+                            <h3>@Model.Car.CarBrand @Model.Car.CarModel</h3>
+                        </div>
+                        <ul class="specs">
+                            <li>
+                                <span>Engine</span>
+                                <span class="spec">@Model.Car.Engine.EngineHorsePower hp @Model.Car.Engine.EngineVolume cm³</span>
+                            </li>
+                            <li>
+                                <span>Fuel</span>
+                                <span class="spec">@Model.Car.Engine.EngineFuelType</span>
+                            </li>
+                            <li>
+                                <span>Transmission</span>
+                                <span class="spec">@Model.Car.CarTransmissionType</span>
+                            </li>
+                            <li>
+                                <span>Minimum Age</span>
+                                <span class="spec">@Model.Car.MinimumAge</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="item-1">
+                    <div class="item-1-contents">
+                        <div class="text-center">
+                            <h3>Rent Details</h3>
+                        </div>
+                        <ul class="specs">
+                            <li>
+                                <span>Rent Office</span>
+                                <span class="spec">@Model.Car.Office.Address.District.Province.ProvinceName - @Model.Car.Office.Address.District.DistrictName</span>
+                            </li>
+                            <li>
+                                <span>Rent Date</span>
+                                <span class="spec">@Model.RentDate</span>
+                            </li>
+                            <li>
+                                <span>Return Office</span>
+                                <span class="spec">@Model.ReturnOffice.Address.District.DistrictName - @Model.ReturnOffice.Address.District.Province.ProvinceName</span>
+                            </li>
+                            <li>
+                                <span>Return Date</span>
+                                <span class="spec">@Model.ReturnDate</span>
+                            </li>
+                            <li>
+                                <span>Days</span>
+                                <span class="spec">@Model.Days</span>
+                            </li>
+                            <li>
+                                <span>Deposit</span>
+                                <span class="spec">@Model.Car.CarDepositPrice₺</span>
+                            </li>
+                            <li>
+                                <span>Daily Price</span>
+                                <span class="spec">@Model.Car.CarRentPrice₺</span>
+                            </li>
+                            <li>
+                                <span>Total Price</span>
+                                <span class="spec">@Model.TotalPrice₺</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="d-flex action mt-5 float-right">
+                    <a class="btn btn-primary pl-5 pr-5 pt-3 pb-3 text-white">Pay @Model.TotalPrice₺ Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

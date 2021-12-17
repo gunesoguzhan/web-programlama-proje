@@ -9,6 +9,7 @@ using CarRent.Data;
 using CarRent.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace CarRent.Controllers
 {
@@ -37,7 +38,7 @@ namespace CarRent.Controllers
 
         // GET: Car/Details/5
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> DetailsAdmin(int? id)
         {
             if (id == null)
             {
@@ -194,13 +195,16 @@ namespace CarRent.Controllers
             DateTime rentDate = DateTime.ParseExact(rentD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
             DateTime returnDate = DateTime.ParseExact(returnD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
 
-            var rentOffice = _context.Offices.Include(x => x.Address.District.Province).Where(x => x.OfficeId == rentPlace).FirstOrDefault();
             var returnOffice = _context.Offices.Include(x => x.Address.District.Province).Where(x => x.OfficeId == returnPlace).FirstOrDefault();
 
-            HttpContext.Session.SetObject("RentOffice", rentOffice);
-            HttpContext.Session.SetObject("ReturnOffice", returnOffice);
+            Reservation reservation = new Reservation();
+            reservation.RentDate = rentDate;
+            reservation.ReturnDate = returnDate;
+            reservation.Days = returnDate.Day - rentDate.Day;
+            reservation.ReturnOffice = _context.Offices.Where(x => x.OfficeId == returnPlace).FirstOrDefault();
+            HttpContext.Session.SetObject("Reservation", reservation);
 
-            var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office).Where(x => x.OfficeId == rentPlace);
+            var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address).Where(x => x.OfficeId == rentPlace).ToList();
             return View(cars);
         }
     }

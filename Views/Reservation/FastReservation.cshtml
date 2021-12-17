@@ -1,0 +1,90 @@
+﻿@model CarRent.Models.Reservation
+
+@{
+    ViewData["Title"] = "Fast Reservation";
+}
+
+<div class="padding-top-120px bg-dark"></div>
+
+<div class="site-section bg-light padding-top-120px">
+    <div class="container">
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6 col-md-6 mb-4">
+                <div class="item-1">
+                    <img src="@Model.Car.CarImageUrl" alt="Image" class="img-fluid bg-white">
+                    <div class="item-1-contents">
+                        <div class="text-center">
+                            <h3>@Model.Car.CarBrand @Model.Car.CarModel</h3>
+                            <div class="rent-price"><span>@Model.Car.CarRentPrice₺/</span>day</div>
+                        </div>
+                        <ul class="specs">
+                            <li>
+                                <span>Office</span>
+                                <span class="spec">@Model.Car.Office.Address.District.Province.ProvinceName - @Model.Car.Office.Address.District.DistrictName</span>
+                            </li>
+                            <li>
+                                <span>Engine</span>
+                                <span class="spec">@Model.Car.Engine.EngineHorsePower hp @Model.Car.Engine.EngineVolume cm³</span>
+                            </li>
+                            <li>
+                                <span>Fuel</span>
+                                <span class="spec">@Model.Car.Engine.EngineFuelType</span>
+                            </li>
+                            <li>
+                                <span>Transmission</span>
+                                <span class="spec">@Model.Car.CarTransmissionType</span>
+                            </li>
+                            <li>
+                                <span>Minimum Age</span>
+                                <span class="spec">@Model.Car.MinimumAge</span>
+                            </li>
+                            <li>
+                                <span>Depozit</span>
+                                <span class="spec">@Model.Car.CarDepositPrice₺</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section pb-6 pt-0 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <form class="trip-form" method="post" asp-action="FastReserve" asp-controller="Reservation">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-6">
+                            <h3 class="m-0">Begin your trip here</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="cf-2">Where you go</label>
+                            <select type="text" id="cf-2" name="ReturnPlace" class="form-control" asp-items="ViewBag.ProvinceDistrict" required>
+                                <option value="">Your drop-off address</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="cf-3">Journey date</label>
+                            <input type="datetime-local" id="cf-3" name="RentDate" placeholder="Your pickup address" class="form-control px-3" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="cf-4">Return date</label>
+                            <input type="datetime-local" id="cf-4" name="ReturnDate" placeholder="Your pickup address" class="form-control px-3" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="submit" value="Confirm" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

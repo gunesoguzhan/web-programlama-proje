@@ -35,7 +35,7 @@
                         </ul>
                         <div class="d-flex align-items-center bg-light p-3">
                             <span>@Model.First().CarRentPrice₺/day</span>
-                            <a asp-action="FastRent" asp-controller="RentDetails" asp-route-id="@Model.First().CarId" class="ml-auto btn btn-primary">Rent Now</a>
+                            <a asp-action="FastReservation" asp-controller="Reservation" asp-route-id="@Model.First().CarId" class="ml-auto btn btn-primary">Rent Now</a>
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                                     </li>
                                 </ul>
                                 <div class="d-flex action">
-                                    <a asp-action="FastRent" asp-controller="RentDetails" asp-route-id="@item.CarId" class="btn btn-primary">Rent Now</a>
+                                    <a asp-action="FastReservation" asp-controller="Reservation" asp-route-id="@item.CarId" class="btn btn-primary">Rent Now</a>
                                 </div>
                             </div>
                         </div>
