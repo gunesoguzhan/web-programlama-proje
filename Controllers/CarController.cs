@@ -29,40 +29,12 @@ namespace CarRent.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ListAdmin()
-        {
-            var applicationDbContext = _context.Cars.Include(c => c.Engine).Include(c => c.Office);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
-        // GET: Car/Details/5
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DetailsAdmin(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var car = await _context.Cars
-                .Include(c => c.Engine)
-                .Include(c => c.Office)
-                .FirstOrDefaultAsync(m => m.CarId == id);
-            if (car == null)
-            {
-                return NotFound();
-            }
-
-            return View(car);
-        }
-
         // GET: Car/Create
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["EngineId"] = new SelectList(_context.Engines, "EngineId", "EngineName");
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeEmailAddress");
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName");
             return View();
         }
 
@@ -80,7 +52,7 @@ namespace CarRent.Controllers
                 return RedirectToAction(nameof(ListAdmin));
             }
             ViewData["EngineId"] = new SelectList(_context.Engines, "EngineId", "EngineName", car.EngineId);
-            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeEmailAddress", car.OfficeId);
+            ViewData["OfficeId"] = new SelectList(_context.Offices, "OfficeId", "OfficeName", car.OfficeId);
             return View(car);
         }
 
@@ -206,6 +178,33 @@ namespace CarRent.Controllers
 
             var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address).Where(x => x.OfficeId == rentPlace).ToList();
             return View(cars);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ListAdmin()
+        {
+            var applicationDbContext = _context.Cars.Include(c => c.Engine).Include(c => c.Office);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DetailsAdmin(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var car = await _context.Cars
+                .Include(c => c.Engine)
+                .Include(c => c.Office)
+                .FirstOrDefaultAsync(m => m.CarId == id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            return View(car);
         }
     }
 }

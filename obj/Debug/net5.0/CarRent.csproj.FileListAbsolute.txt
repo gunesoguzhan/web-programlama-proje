@@ -282,3 +282,5 @@ D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Car\DetailsAdmin.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Reservation\Details.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Reservation\FastReservation.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Reservation\Payment.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Reservation\Complated.cshtml.g.cs

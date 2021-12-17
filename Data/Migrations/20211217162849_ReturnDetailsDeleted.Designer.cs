@@ -4,14 +4,16 @@ using CarRent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRent.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211217162849_ReturnDetailsDeleted")]
+    partial class ReturnDetailsDeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,17 +264,20 @@ namespace CarRent.Data.Migrations
                     b.ToTable("Provinces");
                 });
 
-            modelBuilder.Entity("CarRent.Models.Reservation", b =>
+            modelBuilder.Entity("CarRent.Models.RentDetails", b =>
                 {
-                    b.Property<int>("ReservationId")
+                    b.Property<int>("RentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarId")
+                    b.Property<int?>("CarId")
                         .HasColumnType("int");
 
                     b.Property<int>("Days")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OfficeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("RentDate")
@@ -281,24 +286,21 @@ namespace CarRent.Data.Migrations
                     b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ReturnOfficeId")
-                        .HasColumnType("int");
-
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ReservationId");
+                    b.HasKey("RentId");
 
                     b.HasIndex("CarId");
 
-                    b.HasIndex("ReturnOfficeId");
+                    b.HasIndex("OfficeId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("RentDetails");
                 });
 
             modelBuilder.Entity("CarRent.Models.UserStatisticDetails", b =>
@@ -625,20 +627,18 @@ namespace CarRent.Data.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("CarRent.Models.Reservation", b =>
+            modelBuilder.Entity("CarRent.Models.RentDetails", b =>
                 {
                     b.HasOne("CarRent.Models.Car", "Car")
-                        .WithMany("Reservations")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("RentDetails")
+                        .HasForeignKey("CarId");
 
                     b.HasOne("CarRent.Models.Office", "ReturnOffice")
-                        .WithMany("Reservations")
-                        .HasForeignKey("ReturnOfficeId");
+                        .WithMany("RentDetails")
+                        .HasForeignKey("OfficeId");
 
                     b.HasOne("CarRent.Models.UserDetails", "User")
-                        .WithMany("Reservations")
+                        .WithMany("RentDetails")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Car");
@@ -726,7 +726,7 @@ namespace CarRent.Data.Migrations
 
             modelBuilder.Entity("CarRent.Models.Car", b =>
                 {
-                    b.Navigation("Reservations");
+                    b.Navigation("RentDetails");
                 });
 
             modelBuilder.Entity("CarRent.Models.Country", b =>
@@ -748,7 +748,7 @@ namespace CarRent.Data.Migrations
                 {
                     b.Navigation("Cars");
 
-                    b.Navigation("Reservations");
+                    b.Navigation("RentDetails");
                 });
 
             modelBuilder.Entity("CarRent.Models.Province", b =>
@@ -760,7 +760,7 @@ namespace CarRent.Data.Migrations
                 {
                     b.Navigation("Campaigns");
 
-                    b.Navigation("Reservations");
+                    b.Navigation("RentDetails");
 
                     b.Navigation("UserStatistics");
                 });

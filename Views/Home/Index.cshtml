@@ -5,37 +5,37 @@
 }
 
 <div class="ftco-blocks-cover-1" >
-    <div class="ftco-cover-1" style="background-image: url(@Url.Content(Model.First().CarCoverImageUrl));">
+    <div class="ftco-cover-1" style="background-image: url(@Url.Content(Model.FirstOrDefault().CarCoverImageUrl));">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
                     <div class="feature-car-rent-box-1">
-                        <h3>@Model.First().CarBrand @Model.First().CarModel</h3>
+                        <h3>@Model.FirstOrDefault().CarBrand @Model.FirstOrDefault().CarModel</h3>
                         <ul class="list-unstyled">
                             <li>
                                 <span>Office</span>
-                                <span class="spec">@Model.First().Office.Address.District.Province.ProvinceName - @Model.First().Office.Address.District.DistrictName</span>
+                                <span class="spec">@Model.FirstOrDefault().Office.Address.District.Province.ProvinceName - @Model.FirstOrDefault().Office.Address.District.DistrictName</span>
                             </li>
                             <li>
                                 <span>Engine</span>
-                                <span class="spec">@Model.First().Engine.EngineHorsePower hp @Model.First().Engine.EngineVolume cm³</span>
+                                <span class="spec">@Model.FirstOrDefault().Engine.EngineHorsePower hp @Model.FirstOrDefault().Engine.EngineVolume cm³</span>
                             </li>
                             <li>
                                 <span>Fuel</span>
-                                <span class="spec">@Model.First().Engine.EngineFuelType</span>
+                                <span class="spec">@Model.FirstOrDefault().Engine.EngineFuelType</span>
                             </li>
                             <li>
                                 <span>Transmission</span>
-                                <span class="spec">@Model.First().CarTransmissionType</span>
+                                <span class="spec">@Model.FirstOrDefault().CarTransmissionType</span>
                             </li>
                             <li>
                                 <span>Minium age</span>
-                                <span class="spec">@Model.First().MinimumAge</span>
+                                <span class="spec">@Model.FirstOrDefault().MinimumAge</span>
                             </li>
                         </ul>
                         <div class="d-flex align-items-center bg-light p-3">
-                            <span>@Model.First().CarRentPrice₺/day</span>
-                            <a asp-action="FastReservation" asp-controller="Reservation" asp-route-id="@Model.First().CarId" class="ml-auto btn btn-primary">Rent Now</a>
+                            <span>@Model.FirstOrDefault().CarRentPrice₺/day</span>
+                            <a asp-action="FastReservation" asp-controller="Reservation" asp-route-id="@Model.FirstOrDefault().CarId" class="ml-auto btn btn-primary">Rent Now</a>
                         </div>
                     </div>
                 </div>

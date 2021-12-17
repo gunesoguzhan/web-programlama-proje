@@ -33,8 +33,6 @@ namespace CarRent.Models
 
         public ICollection<Car> Cars { get; set; }
 
-        public ICollection<RentDetails> RentDetails { get; set; }
-
-        public ICollection<ReturnDetails> ReturnDetails { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
     }
 }

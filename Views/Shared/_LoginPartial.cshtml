@@ -9,7 +9,7 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             @User.Identity.Name
-        </a>
+            </a>
         <div class="dropdown-menu carrent-border-top pl-3 pr-3" aria-labelledby="navbarDropdownMenuLink">
             <a class="nav-link dropdown-item talign-center carrent-border-bottom" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Settings</a>
             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
@@ -20,14 +20,18 @@
                 <button type="submit" class="nav-link btn btn-link text-dark m-0 p-0">Logout</button>
             </form>
         </div>
-      </li>
+    </li>
 }
 else
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">
+            <p class="carrent-nav-link">Register</p>
+        </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
+            <p class="carrent-nav-link">Login</p>
+        </a>
     </li>
 }

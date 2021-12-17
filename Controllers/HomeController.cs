@@ -41,7 +41,7 @@ namespace CarRent.Controllers
             {
                 Random rand = new Random(DateTime.Now.Millisecond);
                 int toSkip = rand.Next(0, _context.Cars.Count());
-                cars.Add(_context.Cars.Include(x => x.Engine).Include(x => x.Office.Address.District.Province).Skip(toSkip).Take(1).First());
+                cars.Add(_context.Cars.Include(x => x.Engine).Include(x => x.Office.Address.District.Province).Skip(toSkip).Take(1).FirstOrDefault());
             }
             
             return View(cars);

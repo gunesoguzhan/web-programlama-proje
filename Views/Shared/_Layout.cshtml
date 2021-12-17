@@ -63,9 +63,21 @@
 
                         <nav class="site-navigation text-right ml-auto d-none d-lg-block navbar" role="navigation">
                             <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                                <li><a asp-controller="Car" asp-action="Index" class="nav-link">Cars</a></li>
-                                <li><a asp-controller="Office" asp-action="Index" class="nav-link">Offices</a></li>
-                                <li><a asp-controller="Campaign" asp-action="Index" class="nav-link">Campaigns</a></li>
+                                <li>
+                                    <a asp-controller="Car" asp-action="Index" class="nav-link">
+                                        <p class="carrent-nav-link">Cars</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Office" asp-action="Index" class="nav-link carrent-nav-link">
+                                        <p class="carrent-nav-link">Offices</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Campaign" asp-action="Index" class="nav-link carrent-nav-link">
+                                        <p class="carrent-nav-link">Campaigns</p>
+                                    </a>
+                                </li>
                                 <partial name="_LoginPartial" />
                             </ul>
                         </nav>
@@ -89,41 +101,10 @@
                     </div>
                     <div class="col-lg-8 ml-auto">
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 offset-lg-6">
                                 <h2 class="footer-heading mb-4">Quick Links</h2>
                                 <ul class="list-unstyled">
                                     <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Testimonials</a></li>
-                                    <li><a href="#">Terms of Service</a></li>
-                                    <li><a href="#">Privacy</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-3">
-                                <h2 class="footer-heading mb-4">Quick Links</h2>
-                                <ul class="list-unstyled">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Testimonials</a></li>
-                                    <li><a href="#">Terms of Service</a></li>
-                                    <li><a href="#">Privacy</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-3">
-                                <h2 class="footer-heading mb-4">Quick Links</h2>
-                                <ul class="list-unstyled">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Testimonials</a></li>
-                                    <li><a href="#">Terms of Service</a></li>
-                                    <li><a href="#">Privacy</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-3">
-                                <h2 class="footer-heading mb-4">Quick Links</h2>
-                                <ul class="list-unstyled">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Testimonials</a></li>
                                     <li><a href="#">Terms of Service</a></li>
                                     <li><a href="#">Privacy</a></li>
                                     <li><a href="#">Contact Us</a></li>

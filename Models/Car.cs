@@ -85,9 +85,7 @@ namespace CarRent.Models
         [ForeignKey("OfficeId")]
         public Office Office { get; set; }
 
-        public ICollection<RentDetails> RentDetails { get; set; }
-
-        public ICollection<ReturnDetails> ReturnDetails { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
     }
 
     public enum CarType

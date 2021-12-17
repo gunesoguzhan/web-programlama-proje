@@ -25,6 +25,12 @@ namespace CarRent.Controllers
         public IActionResult Details(int id)
         {
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
             reservation.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             HttpContext.Session.SetObject("Reservation", reservation);
             return View(reservation);
@@ -35,6 +41,12 @@ namespace CarRent.Controllers
             Car car = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address.District.Province).Where(x => x.CarId == id).FirstOrDefault();
 
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
+            
+            if(reservation == null)
+            {
+                return NotFound();
+            }
+
             reservation.Car = car;
             reservation.TotalPrice = (reservation.Days * reservation.Car.CarRentPrice) + reservation.Car.CarDepositPrice;
             HttpContext.Session.SetObject("Reservation", reservation);
@@ -45,6 +57,11 @@ namespace CarRent.Controllers
         public IActionResult FastReservation(int id)
         {
             Car car = _context.Cars.Include(x => x.Office.Address.District.Province).Include(x => x.Engine).Where(x => x.CarId == id).FirstOrDefault();
+
+            if(car == null)
+            {
+                return NotFound();
+            }
 
             Reservation reservation = new Reservation();
             reservation.Car = car;
@@ -63,6 +80,7 @@ namespace CarRent.Controllers
             return View(reservation);
         }
 
+        [HttpPost]
         public IActionResult FastReserve()
         {
             string returnP = HttpContext.Request.Form["ReturnPlace"].ToString();
@@ -89,6 +107,33 @@ namespace CarRent.Controllers
             HttpContext.Session.SetObject("Reservation", reservation);
 
             return RedirectToAction("Details");
+        }
+
+        public IActionResult Payment()
+        {
+            if(HttpContext.Session.GetObject<Reservation>("Reservation") == null)
+            {
+                return NotFound();
+            }
+
+            return View();
+        }
+
+        public IActionResult Complated()
+        {
+            Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            _context.Entry(reservation).State = EntityState.Modified;
+
+            _context.Add(reservation);
+            _context.SaveChanges();
+
+            return View();
         }
     }
 }

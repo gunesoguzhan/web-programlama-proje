@@ -17,8 +17,7 @@ namespace CarRent.Data
         public DbSet<Engine> Engines { get; set; }
         public DbSet<Office> Offices { get; set; }
         public DbSet<Province> Provinces { get; set; }
-        public DbSet<RentDetails> RentDetails { get; set; }
-        public DbSet<ReturnDetails> ReturnDetails { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
         public DbSet<UserStatisticDetails> UserStatisticDetails { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
