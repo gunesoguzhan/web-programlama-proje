@@ -167,12 +167,27 @@ namespace CarRent.Controllers
             DateTime rentDate = DateTime.ParseExact(rentD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
             DateTime returnDate = DateTime.ParseExact(returnD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
 
+            if(rentDate < DateTime.Now.AddMinutes(5))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if(returnDate < rentDate.AddMinutes(55))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var returnOffice = _context.Offices.Include(x => x.Address.District.Province).Where(x => x.OfficeId == returnPlace).FirstOrDefault();
 
             Reservation reservation = new Reservation();
             reservation.RentDate = rentDate;
             reservation.ReturnDate = returnDate;
             reservation.Days = returnDate.Day - rentDate.Day;
+
+            if(rentDate.TimeOfDay < returnDate.TimeOfDay)
+            {
+                reservation.Days++;
+            }
+
             reservation.ReturnOffice = _context.Offices.Where(x => x.OfficeId == returnPlace).FirstOrDefault();
             HttpContext.Session.SetObject("Reservation", reservation);
 

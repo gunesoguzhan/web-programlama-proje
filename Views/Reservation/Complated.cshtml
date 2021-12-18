@@ -1,3 +1,132 @@
 ﻿@{
     ViewData["Title"] = "Reservation Complated";
 }
+
+<div class="padding-top-120px bg-dark"></div>
+
+<div class="site-section bg-light padding-top-120px">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-7 text-center mb-5">
+                <h1>Payment Complated</h1>
+                <h5>Thanks for your payment. Your reservation application has been received. You must be at our office 10 minutes before the reservation time. If you think there is an inaccuracy in the information below, contact us.</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="item-1">
+                    <img src="@Model.Car.CarImageUrl" alt="Image" class="img-fluid bg-white">
+                    <div class="item-1-contents">
+                        <div class="text-center">
+                            <h3>@Model.Car.CarBrand @Model.Car.CarModel</h3>
+                        </div>
+                        <ul class="specs">
+                            <li>
+                                <span>Engine</span>
+                                <span class="spec">@Model.Car.Engine.EngineHorsePower hp @Model.Car.Engine.EngineVolume cm³</span>
+                            </li>
+                            <li>
+                                <span>Fuel</span>
+                                <span class="spec">@Model.Car.Engine.EngineFuelType</span>
+                            </li>
+                            <li>
+                                <span>Transmission</span>
+                                <span class="spec">@Model.Car.CarTransmissionType</span>
+                            </li>
+                            <li>
+                                <span>Trim</span>
+                                <span class="spec">@Model.Car.CarTrimPackage</span>
+                            </li>
+                            <li>
+                                <span>Type</span>
+                                <span class="spec">@Model.Car.CarType</span>
+                            </li>
+                            <li>
+                                <span>Year</span>
+                                <span class="spec">@Model.Car.CarProductYear</span>
+                            </li>
+                            <li>
+                                <span>Minimum Age</span>
+                                <span class="spec">@Model.Car.MinimumAge</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="item-1">
+                    <div class="item-1-contents">
+                        <div class="text-center">
+                            <h3>Rent Details</h3>
+                        </div>
+                        <ul class="specs">
+                            <li>
+                                <span>Rent Office</span>
+                                <span class="spec">@Model.Car.Office.Address.District.Province.ProvinceName - @Model.Car.Office.Address.District.DistrictName</span>
+                            </li>
+                            <li>
+                                <span>Rent Date</span>
+                                <span class="spec">@Model.RentDate</span>
+                            </li>
+                            <li>
+                                <span>Return Office</span>
+                                <span class="spec">@Model.ReturnOffice.Address.District.DistrictName - @Model.ReturnOffice.Address.District.Province.ProvinceName</span>
+                            </li>
+                            <li>
+                                <span>Return Date</span>
+                                <span class="spec">@Model.ReturnDate</span>
+                            </li>
+                            <li>
+                                <span>Days</span>
+                                <span class="spec">@Model.Days</span>
+                            </li>
+                            <li>
+                                <span>Deposit</span>
+                                <span class="spec">@Model.Car.CarDepositPrice₺</span>
+                            </li>
+                            <li>
+                                <span>Daily Price</span>
+                                <span class="spec">@Model.Car.CarRentPrice₺</span>
+                            </li>
+                            <li>
+                                <span>Total Price</span>
+                                <span class="spec">@Model.TotalPrice₺ paid.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container site-section mb-5">
+    <div class="row justify-content-center text-center">
+        <div class="col-7 text-center mb-5">
+            <h2>How it works</h2>
+            <p>Our car rental process is as shown below.</p>
+        </div>
+    </div>
+    <div class="how-it-works d-flex">
+        <div class="step">
+            <span class="number"><span>01</span></span>
+            <span class="caption">Time &amp; Place</span>
+        </div>
+        <div class="step">
+            <span class="number"><span>02</span></span>
+            <span class="caption ">Car</span>
+        </div>
+        <div class="step">
+            <span class="number"><span>03</span></span>
+            <span class="caption">Details</span>
+        </div>
+        <div class="step">
+            <span class="number"><span>04</span></span>
+            <span class="caption">Checkout</span>
+        </div>
+        <div class="step">
+            <span class="number current-number"><span>05</span></span>
+            <span class="caption">Done</span>
+        </div>
+    </div>
+</div>

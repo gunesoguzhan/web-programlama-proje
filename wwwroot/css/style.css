@@ -1509,6 +1509,10 @@ h1, h2, h3, h4, h5,
     display: block;
     position: relative;
     margin: 0 auto 10px auto; }
+.how-it-works .step .current-number {
+    border: 4px solid #FABB51;
+    color: #FABB51;
+}
     .how-it-works .step .number > span {
       position: absolute;
       top: 50%;
@@ -1518,6 +1522,9 @@ h1, h2, h3, h4, h5,
       transform: translate(-50%, -50%);
       font-size: 1.3rem;
       color: #00C1B4; }
+.how-it-works .step .current-number > span {
+    color: #FABB51;
+}
   .how-it-works .step .caption {
     display: block; }
 

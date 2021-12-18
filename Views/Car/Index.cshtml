@@ -26,8 +26,8 @@
                         <img src="@item.CarImageUrl" alt="Image" class="img-fluid bg-white">
                         <div class="item-1-contents">
                             <div class="text-center">
-                                <h3>@item.CarBrand @item.CarModel</h3>
-                                <div class="rent-price"><span>@item.CarRentPrice₺/</span>day</div>
+                                <h3>@item.CarBrand @item.CarModel @item.CarTrimPackage</h3>
+                                <div class="rent-price"><span>@item.CarRentPrice₺/</span>day + @item.CarDepositPrice₺ deposit</div>
                             </div>
                             <ul class="specs">
                                 <li>
@@ -46,6 +46,14 @@
                                     <span>Transmission</span>
                                     <span class="spec">@item.CarTransmissionType</span>
                                 </li>
+                                <li>
+                                    <span>Trim</span>
+                                    <span class="spec">@item.CarTrimPackage</span>
+                                </li>
+                                <li>
+                                    <span>Minimum Age</span>
+                                    <span class="spec">@item.MinimumAge</span>
+                                </li>
                             </ul>
                             <div class="d-flex action">
                                 <a asp-action="FastReservation" asp-controller="Reservation" asp-route-id="@item.CarId" class="btn btn-primary">Rent Now</a>
@@ -56,5 +64,37 @@
                 </div>
             }
         </div>
+    </div>
+</div>
+
+<div class="container site-section mb-5">
+    <div class="row justify-content-center text-center">
+        <div class="col-7 text-center mb-5">
+            <h2>How it works</h2>
+            <p>Our fast car rental process is as shown below.</p>
+        </div>
+    </div>
+    <div class="how-it-works d-flex">
+        <div class="step">
+            <span class="number current-number"><span>01</span></span>
+            <span class="caption">Car</span>
+        </div>
+        <div class="step">
+            <span class="number"><span>02</span></span>
+            <span class="caption">Time &amp; Place</span>
+        </div>
+        <div class="step">
+            <span class="number"><span>03</span></span>
+            <span class="caption">Details</span>
+        </div>
+        <div class="step">
+            <span class="number"><span>04</span></span>
+            <span class="caption">Checkout</span>
+        </div>
+        <div class="step">
+            <span class="number"><span>05</span></span>
+            <span class="caption">Done</span>
+        </div>
+
     </div>
 </div>
