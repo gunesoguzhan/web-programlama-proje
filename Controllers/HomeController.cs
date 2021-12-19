@@ -35,16 +35,18 @@ namespace CarRent.Controllers
                                     }).ToList();
             ViewData["ProvinceDistrict"] = new SelectList(provinceDistrict, "DistrictId", "ProvinceDistrict");
 
-            List<Car> cars = new List<Car>();
+            List<Car> cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address.District.Province).Where(x => x.Reservations.Count() == 0 || !x.Reservations.Any(y => y.ReservationStatus == ReservationStatus.reserved)).ToList();
 
-            for(int i = 0; i < 2; i++)
-            {
-                Random rand = new Random(DateTime.Now.Millisecond);
-                int toSkip = rand.Next(0, _context.Cars.Count());
-                cars.Add(_context.Cars.Include(x => x.Engine).Include(x => x.Office.Address.District.Province).Skip(toSkip).Take(1).FirstOrDefault());
-            }
-            
-            return View(cars);
+            //for(int i = 0; i < 2; i++)
+            //{
+            //    Random rand = new Random(DateTime.Now.Millisecond);
+            //    int toSkip = rand.Next(0, _context.Cars.Count());
+            //    cars.Add(_context.Cars.Include(x => x.Engine).Include(x => x.Office.Address.District.Province).Where(x => x.Reservation == null || x.Reservation.ReservationStatus == ReservationStatus.complated).Skip(toSkip).Take(1).FirstOrDefault());
+            //}
+
+            ViewData["Cars"] = cars;
+
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

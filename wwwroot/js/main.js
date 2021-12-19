@@ -134,17 +134,17 @@ jQuery(document).ready(function($) {
 		    margin: 20,
 		    smartSpeed: 1000,
 		    autoplay: true,
-		    nav: true,
+		    nav: false,
 		    responsive:{
 	        600:{
 	        	margin: 20,
-	        	nav: true,
+	        	nav: false,
 	          items: 2
 	        },
 	        1000:{
 	        	margin: 20,
 	        	stagePadding: 0,
-	        	nav: true,
+	        	nav: false,
 	          items: 2
 	        }
 		    }
@@ -170,7 +170,7 @@ jQuery(document).ready(function($) {
 	    smartSpeed: 1500,
 	    autoplay: true,
 	    pauseOnHover: false,
-	    dots: true,
+	    dots: false,
 	    nav: true,
 	    navText: ['<span class="icon-keyboard_arrow_left">', '<span class="icon-keyboard_arrow_right">']
 	  });
@@ -184,7 +184,7 @@ jQuery(document).ready(function($) {
 		    margin: 0,
 		    autoplay: false,
 		    nav: false,
-		    dots: true,
+		    dots: false,
 		    touchDrag: true,
   			mouseDrag: true,
   			smartSpeed: 1000,

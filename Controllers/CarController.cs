@@ -25,7 +25,7 @@ namespace CarRent.Controllers
         // GET: Car
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Cars.Include(c => c.Engine).Include(c => c.Office.Address.District.Province);
+            var applicationDbContext = _context.Cars.Include(c => c.Engine).Include(c => c.Office.Address.District.Province).Where(x => x.Reservations.Count() == 0 || !x.Reservations.Any(y => y.ReservationStatus == ReservationStatus.reserved));
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -191,7 +191,7 @@ namespace CarRent.Controllers
             reservation.ReturnOffice = _context.Offices.Where(x => x.OfficeId == returnPlace).FirstOrDefault();
             HttpContext.Session.SetObject("Reservation", reservation);
 
-            var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address).Where(x => x.OfficeId == rentPlace).ToList();
+            var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address).Where(x => x.OfficeId == rentPlace).Where(x=>x.Reservations.Count() == 0 || !x.Reservations.Any(y => y.ReservationStatus == ReservationStatus.reserved)).ToList();
             return View(cars);
         }
 

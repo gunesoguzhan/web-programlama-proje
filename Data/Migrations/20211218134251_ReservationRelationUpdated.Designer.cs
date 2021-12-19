@@ -4,14 +4,16 @@ using CarRent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRent.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211218134251_ReservationRelationUpdated")]
+    partial class ReservationRelationUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,9 +280,6 @@ namespace CarRent.Data.Migrations
                     b.Property<DateTime>("RentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ReservationStatus")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
 
@@ -295,11 +294,14 @@ namespace CarRent.Data.Migrations
 
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CarId")
+                        .IsUnique();
 
                     b.HasIndex("ReturnOfficeId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Reservations");
                 });
@@ -631,8 +633,8 @@ namespace CarRent.Data.Migrations
             modelBuilder.Entity("CarRent.Models.Reservation", b =>
                 {
                     b.HasOne("CarRent.Models.Car", "Car")
-                        .WithMany("Reservations")
-                        .HasForeignKey("CarId")
+                        .WithOne("Reservation")
+                        .HasForeignKey("CarRent.Models.Reservation", "CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -641,8 +643,8 @@ namespace CarRent.Data.Migrations
                         .HasForeignKey("ReturnOfficeId");
 
                     b.HasOne("CarRent.Models.UserDetails", "User")
-                        .WithMany("Reservations")
-                        .HasForeignKey("UserId");
+                        .WithOne("Reservation")
+                        .HasForeignKey("CarRent.Models.Reservation", "UserId");
 
                     b.Navigation("Car");
 
@@ -729,7 +731,7 @@ namespace CarRent.Data.Migrations
 
             modelBuilder.Entity("CarRent.Models.Car", b =>
                 {
-                    b.Navigation("Reservations");
+                    b.Navigation("Reservation");
                 });
 
             modelBuilder.Entity("CarRent.Models.Country", b =>
@@ -763,7 +765,7 @@ namespace CarRent.Data.Migrations
                 {
                     b.Navigation("Campaigns");
 
-                    b.Navigation("Reservations");
+                    b.Navigation("Reservation");
 
                     b.Navigation("UserStatistics");
                 });

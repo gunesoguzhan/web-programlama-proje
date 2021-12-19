@@ -56,7 +56,7 @@ namespace CarRent.Controllers
 
         public IActionResult FastReservation(int id)
         {
-            Car car = _context.Cars.Include(x => x.Office.Address.District.Province).Include(x => x.Engine).Where(x => x.CarId == id).FirstOrDefault();
+            Car car = _context.Cars.Include(x => x.Office.Address.District.Province).Include(x => x.Engine).Where(x => x.CarId == id).Where(x => x.Reservations.Count() == 0 || !x.Reservations.Any(y => y.ReservationStatus == ReservationStatus.reserved)).FirstOrDefault();
 
             if(car == null)
             {
@@ -134,6 +134,19 @@ namespace CarRent.Controllers
             return View();
         }
 
+        public IActionResult Pay()
+        {
+            Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
+            bool value = _context.Reservations.Where(x => x.UserId == reservation.UserId).Any(x => x.ReservationStatus == ReservationStatus.reserved);
+
+            if (value)
+            {
+                return RedirectToAction("Failed");
+            }
+
+            return RedirectToAction("Complated");
+        }
+
         public IActionResult Complated()
         {
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
@@ -149,6 +162,20 @@ namespace CarRent.Controllers
             _context.SaveChanges();
 
             return View(reservation);
+        }
+
+        public IActionResult Failed()
+        {
+            return View();
+        }
+
+        public IActionResult EndReservation(int id)
+        {
+            var reservation = _context.Reservations.Include(x => x.Car.Engine).Include(x => x.Car.Office.Address.District.Province).Include(x => x.ReturnOffice.Address.District.Province).Where(x => x.ReservationId == id).FirstOrDefault();
+            reservation.ReservationStatus = ReservationStatus.complated;
+            reservation.Car.Office = reservation.ReturnOffice;
+            _context.SaveChanges();
+            return RedirectToAction("Reservations", "User");
         }
     }
 }

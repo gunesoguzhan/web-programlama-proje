@@ -284,3 +284,11 @@ D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Reservation\FastReservation.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Reservation\Payment.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Reservation\Complated.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\AccessDenied.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\Email.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\User\Reservations.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Reservation\Failed.cshtml.g.cs

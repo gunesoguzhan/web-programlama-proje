@@ -21,7 +21,9 @@ namespace CarRent.Models
         
         [Range(0, double.MaxValue)]
         public double TotalPrice { get; set; }
-        
+
+        public ReservationStatus ReservationStatus { get; set; }
+
         public string UserId { get; set; }
         
         public int CarId { get; set; }
@@ -36,5 +38,11 @@ namespace CarRent.Models
         
         [ForeignKey("ReturnOfficeId")]
         public Office ReturnOffice { get; set; }
+    }
+
+    public enum ReservationStatus
+    {
+        reserved,
+        complated
     }
 }
