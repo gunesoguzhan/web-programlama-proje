@@ -4,14 +4,16 @@ using CarRent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRent.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211220183245_ProvinceIdFixContinue")]
+    partial class ProvinceIdFixContinue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,6 +47,38 @@ namespace CarRent.Data.Migrations
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("CarRent.Models.CampaignDetails", b =>
+                {
+                    b.Property<int>("CampaignDetailsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CampaignDetail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("CampaignDiscount")
+                        .HasColumnType("float");
+
+                    b.Property<string>("CampaignName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("NumberOfCampaigns")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CampaignDetailsId");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("CampaignDetails");
+                });
+
             modelBuilder.Entity("CarRent.Models.Car", b =>
                 {
                     b.Property<int>("CarId")
@@ -66,6 +100,9 @@ namespace CarRent.Data.Migrations
                     b.Property<double>("CarDepositPrice")
                         .HasColumnType("float");
 
+                    b.Property<int>("CarDoors")
+                        .HasColumnType("int");
+
                     b.Property<string>("CarImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -81,6 +118,9 @@ namespace CarRent.Data.Migrations
 
                     b.Property<double>("CarRentPrice")
                         .HasColumnType("float");
+
+                    b.Property<int>("CarSeats")
+                        .HasColumnType("int");
 
                     b.Property<int>("CarTransmissionType")
                         .HasColumnType("int");
@@ -206,7 +246,7 @@ namespace CarRent.Data.Migrations
 
             modelBuilder.Entity("CarRent.Models.Province", b =>
                 {
-                    b.Property<int>("ProvinceId")
+                    b.Property<int>("DuplicateProvinceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -219,7 +259,7 @@ namespace CarRent.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("ProvinceId");
+                    b.HasKey("DuplicateProvinceId");
 
                     b.HasIndex("CountryId");
 
@@ -239,7 +279,7 @@ namespace CarRent.Data.Migrations
                     b.Property<int>("Days")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ReservationDate")
+                    b.Property<DateTime>("RentDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ReservationStatus")
@@ -275,20 +315,23 @@ namespace CarRent.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateOfRegister")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("NumberOfRent")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("TotalRentTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("YearOfRegister")
+                        .HasColumnType("int");
 
                     b.HasKey("StaticticsId");
 
-                    b.HasIndex("UserId")
+                    b.HasIndex("Id")
                         .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                        .HasFilter("[Id] IS NOT NULL");
 
                     b.ToTable("UserStatisticDetails");
                 });
@@ -510,7 +553,9 @@ namespace CarRent.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique()
+                        .HasFilter("[AddressId] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("UserDetails");
                 });
@@ -524,6 +569,15 @@ namespace CarRent.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("District");
+                });
+
+            modelBuilder.Entity("CarRent.Models.CampaignDetails", b =>
+                {
+                    b.HasOne("CarRent.Models.UserDetails", "User")
+                        .WithMany("Campaigns")
+                        .HasForeignKey("Id");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CarRent.Models.Car", b =>
@@ -605,7 +659,7 @@ namespace CarRent.Data.Migrations
                 {
                     b.HasOne("CarRent.Models.UserDetails", "User")
                         .WithOne("UserStatistics")
-                        .HasForeignKey("CarRent.Models.UserStatisticDetails", "UserId");
+                        .HasForeignKey("CarRent.Models.UserStatisticDetails", "Id");
 
                     b.Navigation("User");
                 });
@@ -664,8 +718,8 @@ namespace CarRent.Data.Migrations
             modelBuilder.Entity("CarRent.Models.UserDetails", b =>
                 {
                     b.HasOne("CarRent.Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                        .WithOne("User")
+                        .HasForeignKey("CarRent.Models.UserDetails", "AddressId");
 
                     b.Navigation("Address");
                 });
@@ -673,6 +727,8 @@ namespace CarRent.Data.Migrations
             modelBuilder.Entity("CarRent.Models.Address", b =>
                 {
                     b.Navigation("Office");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CarRent.Models.Car", b =>
@@ -709,6 +765,8 @@ namespace CarRent.Data.Migrations
 
             modelBuilder.Entity("CarRent.Models.UserDetails", b =>
                 {
+                    b.Navigation("Campaigns");
+
                     b.Navigation("Reservations");
 
                     b.Navigation("UserStatistics");

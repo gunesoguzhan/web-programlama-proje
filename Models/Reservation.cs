@@ -10,18 +10,24 @@ namespace CarRent.Models
     public class Reservation
     {
         [Key]
+        [Display(Name = "Reservation")]
         public int ReservationId { get; set; }
 
-        public DateTime RentDate { get; set; }
+        [Display(Name = "Reservation Date")]
+        public DateTime ReservationDate { get; set; }
 
+        [Display(Name = "Return Date")]
         public DateTime ReturnDate { get; set; }
-        
+
+        [Display(Name = "Number Of Days")]
         [Range(0, int.MaxValue)]
         public int Days { get; set; }
-        
+
+        [Display(Name = "Total Price")]
         [Range(0, double.MaxValue)]
         public double TotalPrice { get; set; }
 
+        [Display(Name = "Reservation Status")]
         public ReservationStatus ReservationStatus { get; set; }
 
         public string UserId { get; set; }

@@ -10,6 +10,7 @@ namespace CarRent.Models
     public class Car
     {
         [Key]
+        [Display(Name = "Car")]
         public int CarId { get; set; }
         
         [Required]
@@ -27,16 +28,6 @@ namespace CarRent.Models
         [Required]
         [Display(Name = "Trim Package")]
         public string CarTrimPackage { get; set; }
-
-        [Required]
-        [Display(Name = "Seats")]
-        [Range(1, 100)]
-        public int CarSeats { get; set; }
-
-        [Required]
-        [Display(Name = "Doors")]
-        [Range(1, 10)]
-        public int CarDoors { get; set; }
 
         [Required]
         [Display(Name = "Color")]

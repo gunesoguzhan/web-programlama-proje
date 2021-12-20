@@ -10,12 +10,11 @@ namespace CarRent.Models
     public class Province
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "Province code")]
+        [Display(Name = "Province")]
         public int ProvinceId { get; set; }
 
         [Required]
-        [Display(Name = "Province")]
+        [Display(Name = "Province Name")]
         [MaxLength(50)]
         [MinLength(2, ErrorMessage = "Province name must contain at least two characters.")]
         public string ProvinceName { get; set; }

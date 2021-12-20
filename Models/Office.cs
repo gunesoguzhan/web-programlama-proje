@@ -10,6 +10,7 @@ namespace CarRent.Models
     public class Office
     {
         [Key]
+        [Display(Name = "Office")]
         public int OfficeId { get; set; }
 
         [Required]

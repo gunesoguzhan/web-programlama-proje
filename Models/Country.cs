@@ -9,10 +9,11 @@ namespace CarRent.Models
     public class Country
     {
         [Key]
+        [Display(Name = "Country")]
         public int CountryId { get; set; }
 
         [Required]
-        [Display(Name = "Country")]
+        [Display(Name = "Country Name")]
         [MaxLength(30)]
         [MinLength(2, ErrorMessage = "Country name must contain at least two characters.")]
         public string CountryName { get; set; }

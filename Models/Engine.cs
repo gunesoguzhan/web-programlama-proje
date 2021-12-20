@@ -9,10 +9,11 @@ namespace CarRent.Models
     public class Engine
     {
         [Key]
+        [Display(Name = "Engine")]
         public int EngineId { get; set; }
 
         [Required]
-        [Display(Name = "Engine")]
+        [Display(Name = "Engine Name")]
         public string EngineName { get; set; }
 
         [Required]

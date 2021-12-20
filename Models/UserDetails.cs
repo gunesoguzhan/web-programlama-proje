@@ -25,8 +25,6 @@ namespace CarRent.Models
 
         public UserStatisticDetails UserStatistics { get; set; }
 
-        public ICollection<CampaignDetails> Campaigns { get; set; }
-
         public ICollection<Reservation> Reservations { get; set; }
     }
 }

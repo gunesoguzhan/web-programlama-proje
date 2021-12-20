@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace CarRent.Controllers
 {
+    [Authorize(Roles = "User")]
     public class ReservationController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +23,6 @@ namespace CarRent.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "User")]
         public IActionResult Details(int id)
         {
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
@@ -55,6 +55,7 @@ namespace CarRent.Controllers
             return RedirectToAction("Details");
         }
 
+        [AllowAnonymous]
         public IActionResult FastReservation(int id)
         {
             Car car = _context.Cars.Include(x => x.Office.Address.District.Province).Include(x => x.Engine).Where(x => x.CarId == id).Where(x => x.Reservations.Count() == 0 || !x.Reservations.Any(y => y.ReservationStatus == ReservationStatus.reserved)).FirstOrDefault();
@@ -85,23 +86,23 @@ namespace CarRent.Controllers
         public IActionResult FastReserve()
         {
             string returnP = HttpContext.Request.Form["ReturnPlace"].ToString();
-            string rentD = HttpContext.Request.Form["RentDate"].ToString();
+            string reservationD = HttpContext.Request.Form["RentDate"].ToString();
             string returnD = HttpContext.Request.Form["ReturnDate"].ToString();
 
-            if (string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(rentD) || string.IsNullOrEmpty(returnD))
+            if (string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(reservationD) || string.IsNullOrEmpty(returnD))
             {
                 return RedirectToAction("Index", "Home");
             }
 
             int returnPlace = Convert.ToInt32(returnP);
-            DateTime rentDate = DateTime.ParseExact(rentD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime reservationDate = DateTime.ParseExact(reservationD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
             DateTime returnDate = DateTime.ParseExact(returnD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
 
-            if (rentDate < DateTime.Now.AddMinutes(5))
+            if (reservationDate < DateTime.Now.AddMinutes(5))
             {
                 return RedirectToAction("Index", "Home");
             }
-            else if (returnDate < rentDate.AddMinutes(55))
+            else if (returnDate < reservationDate.AddMinutes(55))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -109,11 +110,11 @@ namespace CarRent.Controllers
             var returnOffice = _context.Offices.Include(x => x.Address.District.Province).Where(x => x.OfficeId == returnPlace).FirstOrDefault();
 
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
-            reservation.RentDate = rentDate;
+            reservation.ReservationDate = reservationDate;
             reservation.ReturnDate = returnDate;
-            reservation.Days = (returnDate - rentDate).Days;
+            reservation.Days = (returnDate - reservationDate).Days;
 
-            if (rentDate.TimeOfDay < returnDate.TimeOfDay)
+            if (reservationDate.TimeOfDay < returnDate.TimeOfDay)
             {
                 reservation.Days++;
             }

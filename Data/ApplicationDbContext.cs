@@ -10,7 +10,6 @@ namespace CarRent.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<CampaignDetails> CampaignDetails { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<District> Districts { get; set; }

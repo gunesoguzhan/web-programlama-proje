@@ -10,11 +10,11 @@ namespace CarRent.Models
     public class District
     {
         [Key]
-        [Display(Name = "District code")]
+        [Display(Name = "District")]
         public int DistrictId { get; set; }
         
         [Required]
-        [Display(Name = "District")]
+        [Display(Name = "District Name")]
         [MaxLength(50)]
         [MinLength(2, ErrorMessage = "District name must contain at least two characters.")]
         public string DistrictName { get; set; }

@@ -43,7 +43,7 @@ namespace CarRent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl, CarCoverImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
+        public async Task<IActionResult> Create([Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl, CarCoverImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace CarRent.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarSeats,CarDoors,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl, CarCoverImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,CarBrand,CarModel,CarType,CarTrimPackage,CarColor,CarProductYear,CarKilometer,CarRentPrice,CarDepositPrice,MinimumAge,CarImageUrl, CarCoverImageUrl,CarTransmissionType,EngineId,OfficeId")] Car car)
         {
             if (id != car.CarId)
             {
@@ -152,26 +152,26 @@ namespace CarRent.Controllers
         [HttpPost]
         public IActionResult List()
         {
-            string rentP = HttpContext.Request.Form["RentPlace"].ToString();
+            string reservationP = HttpContext.Request.Form["RentPlace"].ToString();
             string returnP = HttpContext.Request.Form["ReturnPlace"].ToString();
-            string rentD = HttpContext.Request.Form["RentDate"].ToString();
+            string reservationD = HttpContext.Request.Form["RentDate"].ToString();
             string returnD = HttpContext.Request.Form["ReturnDate"].ToString();
 
-            if(string.IsNullOrEmpty(rentP) || string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(rentD) || string.IsNullOrEmpty(returnD))
+            if(string.IsNullOrEmpty(reservationP) || string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(reservationD) || string.IsNullOrEmpty(returnD))
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            int rentPlace = Convert.ToInt32(rentP);
+            int reservationPlace = Convert.ToInt32(reservationP);
             int returnPlace = Convert.ToInt32(returnP);
-            DateTime rentDate = DateTime.ParseExact(rentD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime reservationDate = DateTime.ParseExact(reservationD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
             DateTime returnDate = DateTime.ParseExact(returnD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
 
-            if(rentDate < DateTime.Now.AddMinutes(5))
+            if(reservationDate < DateTime.Now.AddMinutes(5))
             {
                 return RedirectToAction("Index", "Home");
             }
-            else if(returnDate < rentDate.AddMinutes(55))
+            else if(returnDate < reservationDate.AddMinutes(55))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -179,11 +179,11 @@ namespace CarRent.Controllers
             var returnOffice = _context.Offices.Include(x => x.Address.District.Province).Where(x => x.OfficeId == returnPlace).FirstOrDefault();
 
             Reservation reservation = new Reservation();
-            reservation.RentDate = rentDate;
+            reservation.ReservationDate = reservationDate;
             reservation.ReturnDate = returnDate;
-            reservation.Days = (returnDate - rentDate).Days;
+            reservation.Days = (returnDate - reservationDate).Days;
 
-            if(rentDate.TimeOfDay < returnDate.TimeOfDay)
+            if(reservationDate.TimeOfDay < returnDate.TimeOfDay)
             {
                 reservation.Days++;
             }
@@ -191,7 +191,7 @@ namespace CarRent.Controllers
             reservation.ReturnOffice = _context.Offices.Where(x => x.OfficeId == returnPlace).FirstOrDefault();
             HttpContext.Session.SetObject("Reservation", reservation);
 
-            var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address).Where(x => x.OfficeId == rentPlace).Where(x=>x.Reservations.Count() == 0 || !x.Reservations.Any(y => y.ReservationStatus == ReservationStatus.reserved)).ToList();
+            var cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address).Where(x => x.OfficeId == reservationPlace).Where(x=>x.Reservations.Count() == 0 || !x.Reservations.Any(y => y.ReservationStatus == ReservationStatus.reserved)).ToList();
             return View(cars);
         }
 

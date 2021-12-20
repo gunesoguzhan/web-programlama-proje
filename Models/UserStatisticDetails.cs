@@ -10,23 +10,20 @@ namespace CarRent.Models
     public class UserStatisticDetails
     {
         [Key]
+        [Display(Name = "Statistic")]
         public int StaticticsId { get; set; }
 
         [Required]
         [Display(Name = "Number of rented cars")]
         public int NumberOfRent { get; set; }
-        
-        [Required]
-        [Display(Name = "Total rent time")]
-        public int TotalRentTime { get; set; }
 
         [Required]
-        [Display(Name = "Register year")]
-        public int YearOfRegister { get; set; }
+        [Display(Name = "Register date")]
+        public DateTime DateOfRegister { get; set; }
 
-        public string Id { get; set; }
+        public string UserId { get; set; }
 
-        [ForeignKey("Id")]
+        [ForeignKey("UserId")]
         public UserDetails User { get; set; }
     }
 }

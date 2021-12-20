@@ -22,12 +22,7 @@
     border-radius: 0px;
 }
 
-.carrent-nav-link {
+.no-cars h2, .no-cars h4{
+    text-align: center;
     color: white;
-    transition: 0.3s ease;
-}
-
-.carrent-nav-link:hover {
-    color: #00C1B4;
-    transition: 0.3s ease;
 }

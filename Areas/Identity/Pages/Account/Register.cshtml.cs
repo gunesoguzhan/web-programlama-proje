@@ -98,7 +98,7 @@ namespace CarRent.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    user.UserStatistics = new UserStatisticDetails() { NumberOfRent = 0, TotalRentTime = 0, YearOfRegister = DateTime.Now.Year, Id = user.Id, User = user};
+                    user.UserStatistics = new UserStatisticDetails() { NumberOfRent = 0, DateOfRegister = DateTime.Now, UserId = user.Id, User = user};
 
                     await _userManager.AddToRoleAsync(user, "User");
 

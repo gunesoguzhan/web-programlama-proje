@@ -10,6 +10,7 @@ namespace CarRent.Models
     public class Address
     {
         [Key]
+        [Display(Name = "Address")]
         public int AddressId { get; set; }
 
         [Required]
@@ -27,8 +28,6 @@ namespace CarRent.Models
 
         [ForeignKey("DistrictId")]
         public District District { get; set; }
-
-        public UserDetails User { get; set; }
 
         public Office Office { get; set; }
     }
