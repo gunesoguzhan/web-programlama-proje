@@ -1,6 +1,7 @@
 ﻿using CarRent.Data;
 using CarRent.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -110,7 +111,7 @@ namespace CarRent.Controllers
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
             reservation.RentDate = rentDate;
             reservation.ReturnDate = returnDate;
-            reservation.Days = returnDate.Day - rentDate.Day;
+            reservation.Days = (returnDate - rentDate).Days;
 
             if (rentDate.TimeOfDay < returnDate.TimeOfDay)
             {
@@ -131,19 +132,28 @@ namespace CarRent.Controllers
                 return NotFound();
             }
 
+            HttpContext.Session.SetString("Payment", "Ready");
             return View();
         }
 
         public IActionResult Pay()
         {
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
+
+            if(reservation == null || string.IsNullOrEmpty(HttpContext.Session.GetString("Payment")))
+            {
+                return NotFound();
+            }
+
             bool value = _context.Reservations.Where(x => x.UserId == reservation.UserId).Any(x => x.ReservationStatus == ReservationStatus.reserved);
 
             if (value)
             {
+                HttpContext.Session.SetString("Payment", "Failed");
                 return RedirectToAction("Failed");
             }
 
+            HttpContext.Session.SetString("Payment", "Complated");
             return RedirectToAction("Complated");
         }
 
@@ -151,7 +161,7 @@ namespace CarRent.Controllers
         {
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
 
-            if (reservation == null)
+            if (reservation == null || HttpContext.Session.GetString("Payment") != "Complated")
             {
                 return NotFound();
             }
@@ -166,6 +176,11 @@ namespace CarRent.Controllers
 
         public IActionResult Failed()
         {
+            if(HttpContext.Session.GetString("Payment") != "Failed")
+            {
+                return NotFound();
+            }
+
             return View();
         }
 

@@ -181,7 +181,7 @@ namespace CarRent.Controllers
             Reservation reservation = new Reservation();
             reservation.RentDate = rentDate;
             reservation.ReturnDate = returnDate;
-            reservation.Days = returnDate.Day - rentDate.Day;
+            reservation.Days = (returnDate - rentDate).Days;
 
             if(rentDate.TimeOfDay < returnDate.TimeOfDay)
             {

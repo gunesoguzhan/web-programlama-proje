@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="cf-3">Journey date</label>
-                            <input type="datetime-local" id="cf-3" name="RentDate" placeholder="Your pickup address" class="form-control px-3" required>
+                            <input type="datetime-local" id="cf-3" name="RentDate" placeholder="Your pickup address" class="form-control px-3" required min="@DateTime.Now.AddMinutes(10).ToString("yyyy-MM-ddTHH:mm")">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="cf-4">Return date</label>
