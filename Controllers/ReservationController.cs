@@ -27,7 +27,7 @@ namespace CarRent.Controllers
         {
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
 
-            if (reservation == null)
+            if (reservation == null || reservation.Car == null || reservation.ReturnOffice == null)
             {
                 return NotFound();
             }

@@ -287,3 +287,5 @@ D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\User\Reservations.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Views\Reservation\Failed.cshtml.g.cs
 D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\CarRent.csproj.AssemblyReference.cache
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_Layout.cshtml.g.cs
+D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
