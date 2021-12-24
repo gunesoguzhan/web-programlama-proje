@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace CarRent.Controllers
 {
-    [Authorize(Roles = "User")]
     public class ReservationController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,6 +22,7 @@ namespace CarRent.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult Details(int id)
         {
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
@@ -37,6 +37,7 @@ namespace CarRent.Controllers
             return View(reservation);
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult Reserve(int id)
         {
             Car car = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address.District.Province).Where(x => x.CarId == id).FirstOrDefault();
@@ -82,27 +83,28 @@ namespace CarRent.Controllers
             return View(reservation);
         }
 
+        [Authorize(Roles = "User")]
         [HttpGet]
         public IActionResult FastReserve()
         {
             string returnP = HttpContext.Request.Query["ReturnPlace"].ToString();
-            string reservationD = HttpContext.Request.Query["RentDate"].ToString();
+            string rentD = HttpContext.Request.Query["RentDate"].ToString();
             string returnD = HttpContext.Request.Query["ReturnDate"].ToString();
 
-            if (string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(reservationD) || string.IsNullOrEmpty(returnD))
+            if (string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(rentD) || string.IsNullOrEmpty(returnD))
             {
                 return RedirectToAction("Index", "Home");
             }
 
             int returnPlace = Convert.ToInt32(returnP);
-            DateTime reservationDate = DateTime.ParseExact(reservationD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime rentDate = DateTime.ParseExact(rentD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
             DateTime returnDate = DateTime.ParseExact(returnD, "yyyy-MM-ddTH:m", System.Globalization.CultureInfo.InvariantCulture);
 
-            if (reservationDate < DateTime.Now.AddMinutes(5))
+            if (rentDate < DateTime.Now.AddMinutes(5))
             {
                 return RedirectToAction("Index", "Home");
             }
-            else if (returnDate < reservationDate.AddMinutes(55))
+            else if (returnDate < rentDate.AddMinutes(55))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -110,11 +112,11 @@ namespace CarRent.Controllers
             var returnOffice = _context.Offices.Include(x => x.Address.District.Province).Where(x => x.OfficeId == returnPlace).FirstOrDefault();
 
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
-            reservation.ReservationDate = reservationDate;
+            reservation.RentDate = rentDate;
             reservation.ReturnDate = returnDate;
-            reservation.Days = (returnDate - reservationDate).Days;
+            reservation.Days = (returnDate - rentDate).Days;
 
-            if (reservationDate.TimeOfDay < returnDate.TimeOfDay)
+            if (rentDate.TimeOfDay < returnDate.TimeOfDay)
             {
                 reservation.Days++;
             }
@@ -126,6 +128,7 @@ namespace CarRent.Controllers
             return RedirectToAction("Details");
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult Payment()
         {
             if(HttpContext.Session.GetObject<Reservation>("Reservation") == null)
@@ -137,6 +140,7 @@ namespace CarRent.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult Pay()
         {
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
@@ -158,6 +162,7 @@ namespace CarRent.Controllers
             return RedirectToAction("Complated");
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult Complated()
         {
             Reservation reservation = HttpContext.Session.GetObject<Reservation>("Reservation");
@@ -167,6 +172,8 @@ namespace CarRent.Controllers
                 return NotFound();
             }
 
+            reservation.ReservationDate = DateTime.Now;
+
             _context.Entry(reservation).State = EntityState.Modified;
 
             _context.Add(reservation);
@@ -175,6 +182,7 @@ namespace CarRent.Controllers
             return View(reservation);
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult Failed()
         {
             if(HttpContext.Session.GetString("Payment") != "Failed")
@@ -185,6 +193,7 @@ namespace CarRent.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult EndReservation(int id)
         {
             var reservation = _context.Reservations.Include(x => x.Car.Engine).Include(x => x.Car.Office.Address.District.Province).Include(x => x.ReturnOffice.Address.District.Province).Where(x => x.ReservationId == id).FirstOrDefault();
@@ -192,6 +201,13 @@ namespace CarRent.Controllers
             reservation.Car.Office = reservation.ReturnOffice;
             _context.SaveChanges();
             return RedirectToAction("Reservations", "User");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult LastActiveReservations()
+        {
+            var reservations = _context.Reservations.Include(x => x.Car.Office).Include(x => x.ReturnOffice).OrderByDescending(x => x.ReservationDate).Take(10).Where(x => x.ReservationStatus == ReservationStatus.reserved).ToList();
+            return View(reservations);
         }
     }
 }

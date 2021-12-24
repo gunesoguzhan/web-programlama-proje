@@ -126,12 +126,6 @@
   <data name="Cars" xml:space="preserve">
     <value>Arabalar</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>İletişim</value>
-  </data>
-  <data name="Contact Us" xml:space="preserve">
-    <value>Bize Yazın</value>
-  </data>
   <data name="Language" xml:space="preserve">
     <value>Dil</value>
   </data>

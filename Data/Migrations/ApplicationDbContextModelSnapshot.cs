@@ -239,6 +239,9 @@ namespace CarRent.Data.Migrations
                     b.Property<int>("Days")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("RentDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2");
 

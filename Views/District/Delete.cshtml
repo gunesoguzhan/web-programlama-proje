@@ -1,7 +1,7 @@
 ﻿@model CarRent.Models.District
 
 @{
-    ViewData["Title"] = "Delete The District";
+    ViewData["Title"] = Localizer["Delete The District"];
 }
 
 <div class="padding-top-120px bg-dark"></div>
@@ -10,12 +10,12 @@
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-7 text-center mb-5">
-                <h2>Delete @Model.DistrictName</h2>
-                <h3>Are you sure you want to delete this?</h3>
+                <h2>@Localizer["Delete"] @Model.DistrictName</h2>
+                <h3>@Localizer["Are you sure you want to delete this?"]</h3>
             </div>
         </div>
         <div class="d-flex action mb-5">
-            <a asp-action="Index" class="btn btn-primary">Go back to list</a>
+            <a asp-action="Index" class="btn btn-primary">@Localizer["Go back to list"]</a>
         </div>
         <div class="col-lg-12 col-md-12 mb-4">
             <div class="item-1">
@@ -43,7 +43,7 @@
         </div>
         <form asp-action="Delete">
             <input type="hidden" asp-for="DistrictId" />
-            <input type="submit" value="Delete" class="btn btn-danger" />
+            <input type="submit" value="@Localizer["Delete"]" class="btn btn-danger" />
         </form>
     </div>
 </div>

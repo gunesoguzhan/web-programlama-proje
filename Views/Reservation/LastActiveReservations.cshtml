@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CarRent.Models.Reservation>
+
+@{
+    ViewData["Title"] = Localizer["Last Active Reservations"];
+}
+
+<div class="padding-top-120px bg-dark"></div>
+
+<div class="site-section bg-light padding-top-120px">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-7 text-center mb-5">
+                <h2>@ViewData["Title"]</h2>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="item-1">
+                        <div class="item-1-contents">
+                            <div class="text-center">
+                                <h3>@item.ReservationId</h3>
+                            </div>
+                            <ul class="specs">
+                                <li>
+                                    <span class="spec2">@Html.DisplayNameFor(model => model.ReservationDate)</span>
+                                    <span class="spec spec2">@item.ReservationDate</span>
+                                </li>
+                                <li>
+                                    <span class="spec2">@Html.DisplayNameFor(model => model.RentDate)</span>
+                                    <span class="spec spec2">@item.RentDate</span>
+                                </li>
+                                <li>
+                                    <span class="spec2">@Html.DisplayNameFor(model => model.Car.Office.OfficeId)</span>
+                                    <span class="spec spec2">@item.Car.Office.OfficeName</span>
+                                </li>
+                                <li>
+                                    <span class="spec2">@Html.DisplayNameFor(model => model.ReturnDate)</span>
+                                    <span class="spec spec2">@item.ReturnDate</span>
+                                </li>
+                                <li>
+                                    <span class="spec2">@Html.DisplayNameFor(model => model.ReturnOffice)</span>
+                                    <span class="spec spec2">@item.ReturnOffice</span>
+                                </li>
+                                <li>
+                                    <span class="spec2">@Html.DisplayNameFor(model => model.Days)</span>
+                                    <span class="spec spec2">@item.Days</span>
+                                </li>
+                                <li>
+                                    <span class="spec2">@Html.DisplayNameFor(model => model.Car.CarId)</span>
+                                    <span class="spec spec2">@item.CarId @item.Car.CarBrand @item.Car.CarModel</span>
+                                </li>
+                                <li>
+                                    <span class="spec2">@Localizer["User"]</span>
+                                    <span class="spec spec2">@item.UserId</span>
+                                </li>
+                                <li>
+                                    <span class="spec2">@Html.DisplayNameFor(model => model.TotalPrice)</span>
+                                    <span class="spec spec2">@item.TotalPrice</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

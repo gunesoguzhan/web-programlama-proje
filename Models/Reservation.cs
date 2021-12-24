@@ -16,6 +16,9 @@ namespace CarRent.Models
         [Display(Name = "Reservation Date")]
         public DateTime ReservationDate { get; set; }
 
+        [Display(Name = "Rent Date")]
+        public DateTime RentDate { get; set; }
+
         [Display(Name = "Return Date")]
         public DateTime ReturnDate { get; set; }
 
@@ -43,6 +46,7 @@ namespace CarRent.Models
         public Car Car { get; set; }
         
         [ForeignKey("ReturnOfficeId")]
+        [Display(Name = "Return Office")]
         public Office ReturnOffice { get; set; }
     }
 

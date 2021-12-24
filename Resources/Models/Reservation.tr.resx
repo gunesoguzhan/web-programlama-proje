@@ -120,6 +120,9 @@
   <data name="Number Of Days" xml:space="preserve">
     <value>Gün Sayısı</value>
   </data>
+  <data name="Rent Date" xml:space="preserve">
+    <value>Kiralama Tarihi</value>
+  </data>
   <data name="Reservation" xml:space="preserve">
     <value>Rezervasyon</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="Return Date" xml:space="preserve">
     <value>İade Tarihi</value>
+  </data>
+  <data name="Return Office" xml:space="preserve">
+    <value>İade Ofisi</value>
   </data>
   <data name="Total Price" xml:space="preserve">
     <value>Toplam Ücret</value>

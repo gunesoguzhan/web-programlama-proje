@@ -27,25 +27,6 @@ namespace CarRent.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Office/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var office = await _context.Offices
-                .Include(o => o.Address)
-                .FirstOrDefaultAsync(m => m.OfficeId == id);
-            if (office == null)
-            {
-                return NotFound();
-            }
-
-            return View(office);
-        }
-
 
         // GET: Office/Create
         [Authorize(Roles = "Admin")]

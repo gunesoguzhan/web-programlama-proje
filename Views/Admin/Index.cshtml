@@ -8,17 +8,28 @@
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
             <div class="col-7 text-center mb-5">
-                <h1>Admin Panel</h1>
+                <h1>@Localizer["Admin Panel"]</h1>
             </div>
         </div>
         <div class="row justify-content-center text-center mb-5 mt-5">
             <div class="col-7 text-center mb-5">
-                <h2>User Management Panel</h2>
+                <h2>@Localizer["User Management Panel"]</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 mb-lg-5">
+                <a asp-controller="User" asp-action="List">
+                    <div class="testimonial-2">
+                        <div class="d-flex v-card align-items-center">
+                            <span>@Localizer["List users"]</span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="row justify-content-center text-center mb-3 mt-5">
             <div class="col-7 text-center mb-5">
-                <h2>Car Management Panel</h2>
+                <h2>@Localizer["Car Management Panel"]</h2>
             </div>
         </div>
         <div class="row">
@@ -26,7 +37,7 @@
                 <a asp-controller="Car" asp-action="ListAdmin">
                     <div class="testimonial-2">
                         <div class="d-flex v-card align-items-center">
-                            <span>Car operations</span>
+                            <span>@Localizer["Car operations"]</span>
                         </div>
                     </div>
                 </a>
@@ -35,7 +46,7 @@
                 <a asp-controller="Engine" asp-action="Index">
                     <div class="testimonial-2">
                         <div class="d-flex v-card align-items-center">
-                            <span>Engine operations</span>
+                            <span>@Localizer["Engine operations"]</span>
                         </div>
                     </div>
                 </a>
@@ -43,7 +54,7 @@
         </div>
         <div class="row justify-content-center text-center mb-3 mt-5">
             <div class="col-7 text-center mb-5">
-                <h2>Office Management Panel</h2>
+                <h2>@Localizer["Office Management Panel"]</h2>
             </div>
         </div>
         <div class="row">
@@ -51,7 +62,7 @@
                 <a asp-controller="Office" asp-action="ListAdmin">
                     <div class="testimonial-2">
                         <div class="d-flex v-card align-items-center">
-                            <span>Office operations</span>
+                            <span>@Localizer["Office operations"]</span>
                         </div>
                     </div>
                 </a>
@@ -59,7 +70,7 @@
         </div>
         <div class="row justify-content-center text-center mb-3 mt-5">
             <div class="col-7 text-center mb-5">
-                <h2>Address Management Panel</h2>
+                <h2>@Localizer["Address Management Panel"]</h2>
             </div>
         </div>
         <div class="row">
@@ -67,7 +78,7 @@
                 <a asp-controller="Address" asp-action="Index">
                     <div class="testimonial-2">
                         <div class="d-flex v-card align-items-center">
-                            <span>Address operations</span>
+                            <span>@Localizer["Address operations"]</span>
                         </div>
                     </div>
                 </a>
@@ -76,7 +87,7 @@
                 <a asp-controller="District" asp-action="Index">
                     <div class="testimonial-2">
                         <div class="d-flex v-card align-items-center">
-                            <span>District operations</span>
+                            <span>@Localizer["District operations"]</span>
                         </div>
                     </div>
                 </a>
@@ -85,7 +96,7 @@
                 <a asp-controller="Province" asp-action="Index">
                     <div class="testimonial-2">
                         <div class="d-flex v-card align-items-center">
-                            <span>Province operations</span>
+                            <span>@Localizer["Province operations"]</span>
                         </div>
                     </div>
                 </a>
@@ -94,7 +105,7 @@
                 <a asp-controller="Country" asp-action="Index">
                     <div class="testimonial-2">
                         <div class="d-flex v-card align-items-center">
-                            <span>Country operations</span>
+                            <span>@Localizer["Country operations"]</span>
                         </div>
                     </div>
                 </a>
@@ -102,15 +113,15 @@
         </div>
         <div class="row justify-content-center text-center mb-3 mt-5">
             <div class="col-7 text-center mb-5">
-                <h2>Campaign Management Panel</h2>
+                <h2>@Localizer["Reservation Management Panel"]</h2>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 mb-lg-5">
-                <a asp-controller="CampaignDetails" asp-action="Index">
+                <a asp-controller="Reservation" asp-action="LastActiveReservations">
                     <div class="testimonial-2">
                         <div class="d-flex v-card align-items-center">
-                            <span>Campaign operations</span>
+                            <span>@Localizer["Last Active Reservations"]</span>
                         </div>
                     </div>
                 </a>
