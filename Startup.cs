@@ -39,7 +39,13 @@ namespace CarRent
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddIdentity<UserDetails, IdentityRole>()
+            services.AddIdentity<UserDetails, IdentityRole>(options => {
+                options.Password.RequiredLength = 3;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+            })
                  .AddDefaultTokenProviders()
                  .AddDefaultUI()
                  .AddEntityFrameworkStores<ApplicationDbContext>();

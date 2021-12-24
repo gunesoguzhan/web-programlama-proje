@@ -37,7 +37,7 @@ namespace CarRent.Controllers
                                     }).ToList();
             ViewData["ProvinceDistrict"] = new SelectList(provinceDistrict, "DistrictId", "ProvinceDistrict");
 
-            List<Car> cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address.District.Province).Where(x => x.Reservations.Count() == 0 || !x.Reservations.Any(y => y.ReservationStatus == ReservationStatus.reserved)).OrderBy(x => Guid.NewGuid()).ToList();
+            List<Car> cars = _context.Cars.Include(x => x.Engine).Include(x => x.Office.Address.District.Province).Where(x => x.Reservations.Count() == 0 || !x.Reservations.Any(y => y.ReservationStatus == ReservationStatus.reserved)).OrderBy(x => Guid.NewGuid()).Take(3).ToList();
 
             ViewData["Cars"] = cars;
 

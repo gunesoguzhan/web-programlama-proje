@@ -69,7 +69,7 @@ namespace CarRent.Controllers
                     files[1].CopyTo(fileStream);
                 }
                 car.CarImageUrl = @"/img/cars/" + fileName1 + extension1;
-                car.CarCoverImageUrl = @"/img/covers/" + fileName2 + extension1;
+                car.CarCoverImageUrl = @"/img/covers/" + fileName2 + extension2;
                 _context.Add(car);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ListAdmin));
@@ -132,7 +132,7 @@ namespace CarRent.Controllers
                         files[1].CopyTo(fileStream);
                     }
                     car.CarImageUrl = @"/img/cars/" + fileName1 + extension1;
-                    car.CarCoverImageUrl = @"/img/covers/" + fileName2 + extension1;
+                    car.CarCoverImageUrl = @"/img/covers/" + fileName2 + extension2;
                     _context.Update(car);
                     await _context.SaveChangesAsync();
                 }
