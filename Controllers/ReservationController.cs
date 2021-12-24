@@ -82,12 +82,12 @@ namespace CarRent.Controllers
             return View(reservation);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult FastReserve()
         {
-            string returnP = HttpContext.Request.Form["ReturnPlace"].ToString();
-            string reservationD = HttpContext.Request.Form["RentDate"].ToString();
-            string returnD = HttpContext.Request.Form["ReturnDate"].ToString();
+            string returnP = HttpContext.Request.Query["ReturnPlace"].ToString();
+            string reservationD = HttpContext.Request.Query["RentDate"].ToString();
+            string returnD = HttpContext.Request.Query["ReturnDate"].ToString();
 
             if (string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(reservationD) || string.IsNullOrEmpty(returnD))
             {

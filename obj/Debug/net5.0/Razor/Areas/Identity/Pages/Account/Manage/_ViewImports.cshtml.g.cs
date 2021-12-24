@@ -34,6 +34,13 @@ using CarRent.Areas.Identity.Pages;
 #line hidden
 #nullable disable
 #nullable restore
+#line 4 "D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\Areas\Identity\Pages\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Mvc.Localization;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "D:\Folders\Videos\Lessons\Web Programlama\web-programlama-proje\Areas\Identity\Pages\Account\_ViewImports.cshtml"
 using CarRent.Areas.Identity.Pages.Account;
 
@@ -48,7 +55,7 @@ using CarRent.Areas.Identity.Pages.Account.Manage;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3dcdad26c13d90d5ce3053340dd1f044169d16f1", @"/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3a44e5ceb2bfae672f4ba138d2ca0889f415f2f3", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"5b7763845945de8d4b90776ea0605876c31eb223", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"eb438d055dd33bbd791f07d868e5a3a7fed538c2", @"/Areas/Identity/Pages/Account/_ViewImports.cshtml")]
     public class Areas_Identity_Pages_Account_Manage__ViewImports : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
@@ -57,6 +64,8 @@ using CarRent.Areas.Identity.Pages.Account.Manage;
         {
         }
         #pragma warning restore 1998
+        [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
+        public IViewLocalizer Localizer { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]

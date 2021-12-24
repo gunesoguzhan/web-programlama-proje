@@ -10,16 +10,20 @@ using CarRent.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace CarRent.Controllers
 {
     public class CarController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public CarController(ApplicationDbContext context)
+        public CarController(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // GET: Car
@@ -47,6 +51,25 @@ namespace CarRent.Controllers
         {
             if (ModelState.IsValid)
             {
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+
+                string fileName1 = Guid.NewGuid().ToString();
+                string fileName2 = Guid.NewGuid().ToString();
+                var uploads1 = Path.Combine(webRootPath, @"img/cars");
+                var uploads2 = Path.Combine(webRootPath, @"img/covers");
+                var extension1 = Path.GetExtension(files[0].FileName);
+                var extension2 = Path.GetExtension(files[1].FileName);
+                using (var fileStream = new FileStream(Path.Combine(uploads1, fileName1 + extension1), FileMode.Create))
+                {
+                    files[0].CopyTo(fileStream);
+                }
+                using (var fileStream = new FileStream(Path.Combine(uploads2, fileName2 + extension2), FileMode.Create))
+                {
+                    files[1].CopyTo(fileStream);
+                }
+                car.CarImageUrl = @"/img/cars/" + fileName1 + extension1;
+                car.CarCoverImageUrl = @"/img/covers/" + fileName2 + extension1;
                 _context.Add(car);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ListAdmin));
@@ -91,6 +114,25 @@ namespace CarRent.Controllers
             {
                 try
                 {
+                    string webRootPath = _hostingEnvironment.WebRootPath;
+                    var files = HttpContext.Request.Form.Files;
+
+                    string fileName1 = Guid.NewGuid().ToString();
+                    string fileName2 = Guid.NewGuid().ToString();
+                    var uploads1 = Path.Combine(webRootPath, @"img/cars");
+                    var uploads2 = Path.Combine(webRootPath, @"img/covers");
+                    var extension1 = Path.GetExtension(files[0].FileName);
+                    var extension2 = Path.GetExtension(files[1].FileName);
+                    using (var fileStream = new FileStream(Path.Combine(uploads1, fileName1 + extension1), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(uploads2, fileName2 + extension2), FileMode.Create))
+                    {
+                        files[1].CopyTo(fileStream);
+                    }
+                    car.CarImageUrl = @"/img/cars/" + fileName1 + extension1;
+                    car.CarCoverImageUrl = @"/img/covers/" + fileName2 + extension1;
                     _context.Update(car);
                     await _context.SaveChangesAsync();
                 }
@@ -149,13 +191,13 @@ namespace CarRent.Controllers
             return _context.Cars.Any(e => e.CarId == id);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult List()
         {
-            string reservationP = HttpContext.Request.Form["RentPlace"].ToString();
-            string returnP = HttpContext.Request.Form["ReturnPlace"].ToString();
-            string reservationD = HttpContext.Request.Form["RentDate"].ToString();
-            string returnD = HttpContext.Request.Form["ReturnDate"].ToString();
+            string reservationP = HttpContext.Request.Query["RentPlace"].ToString();
+            string returnP = HttpContext.Request.Query["ReturnPlace"].ToString();
+            string reservationD = HttpContext.Request.Query["RentDate"].ToString();
+            string returnD = HttpContext.Request.Query["ReturnDate"].ToString();
 
             if(string.IsNullOrEmpty(reservationP) || string.IsNullOrEmpty(returnP) || string.IsNullOrEmpty(reservationD) || string.IsNullOrEmpty(returnD))
             {
@@ -212,7 +254,7 @@ namespace CarRent.Controllers
 
             var car = await _context.Cars
                 .Include(c => c.Engine)
-                .Include(c => c.Office)
+                .Include(c => c.Office.Address.District.Province)
                 .FirstOrDefaultAsync(m => m.CarId == id);
             if (car == null)
             {

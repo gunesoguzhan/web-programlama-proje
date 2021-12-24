@@ -11,11 +11,11 @@ namespace CarRent.Models
     public class UserDetails : IdentityUser
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "User surname")]
+        [Display(Name = "Surname")]
         public string Surname { get; set; }
 
         public int? AddressId { get; set; }

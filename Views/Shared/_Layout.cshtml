@@ -64,15 +64,28 @@
                         <nav class="site-navigation text-right ml-auto d-none d-lg-block navbar" role="navigation">
                             <ul class="site-menu main-menu js-clone-nav ml-auto ">
                                 <li>
-                                    <a asp-controller="Car" asp-action="Index" class="nav-link">Cars</a>
+                                    <a asp-controller="Car" asp-action="Index" class="nav-link">@Localizer["Cars"]</a>
                                 </li>
                                 <li>
-                                    <a asp-controller="Office" asp-action="Index" class="nav-link">Offices</a>
+                                    <a asp-controller="Office" asp-action="Index" class="nav-link">@Localizer["Offices"]</a>
                                 </li>
                                 <li>
-                                    <a asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a>
+                                    <a asp-controller="Home" asp-action="Contact" class="nav-link">@Localizer["Contact"]</a>
                                 </li>
+
                                 <partial name="_LoginPartial" />
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @Localizer["Language"]
+                                    </a>
+                                    <div class="dropdown-menu carrent-border-top pl-3 pr-3" aria-labelledby="navbarDropdownMenuLink">
+
+                                        <a class="nav-link dropdown-item talign-center carrent-border-bottom" asp-controller="Home" asp-action="En">English</a>
+
+                                        <a class="nav-link dropdown-item talign-center carrent-border-bottom" asp-controller="Home" asp-action="Tr">Türkçe</a>
+                                    </div>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -90,18 +103,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3">
-                        <h2 class="footer-heading mb-4">About Us</h2>
-                        <p>CarRent is a car rental service established in 2021. It serves its users with its wide vehicle fleet.</p>
+                        <h2 class="footer-heading mb-4">@Localizer["About Us"]</h2>
+                        <p>@Localizer["CarRent is a car rental service established in 2021. It serves its users with its wide vehicle fleet."]</p>
                     </div>
                     <div class="col-lg-8 ml-auto">
                         <div class="row">
                             <div class="col-lg-3 offset-lg-6">
-                                <h2 class="footer-heading mb-4">Quick Links</h2>
+                                <h2 class="footer-heading mb-4">@Localizer["Quick Links"]</h2>
                                 <ul class="list-unstyled">
-                                    <li><a asp-action="Index" asp-controller="Car">Our Cars</a></li>
-                                    <li><a asp-action="Index" asp-controller="Office">Our Offices</a></li>
-                                    <li><a asp-action="Contact" asp-controller="Home">Contact Us</a></li>
-                                </ul>
+                                    <li><a asp-action="Index" asp-controller="Car">@Localizer["Our Cars"]</a></li>
+                                    <li><a asp-action="Index" asp-controller="Office">@Localizer["Our Offices"]</a></li>
+                                    <li><a asp-action="Contact" asp-controller="Home">@Localizer["Contact Us"]</a></li>
+</ul>
                             </div>
                         </div>
                     </div>

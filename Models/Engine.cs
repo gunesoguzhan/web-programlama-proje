@@ -35,10 +35,15 @@ namespace CarRent.Models
 
     public enum EngineFuelType
     {
+        [Display(Name = "Gasoline")]
         Gasoline,
+        [Display(Name = "Diesel")]
         Diesel,
+        [Display(Name = "Lpg")]
         Lpg,
+        [Display(Name = "Electric")]
         Electric,
+        [Display(Name = "Hybrit")]
         Hybrit
     }
 }

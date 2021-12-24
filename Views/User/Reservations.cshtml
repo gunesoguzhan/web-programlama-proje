@@ -1,7 +1,7 @@
 ﻿@model CarRent.Models.Reservation
 
 @{
-    ViewData["Title"] = "My Reservations";
+    ViewData["Title"] = Localizer["My Reservations"];
 }
 
 <div class="padding-top-120px bg-dark"></div>
@@ -14,11 +14,11 @@
                 @if (Model == null)
                 {
 
-                    <h4>You do not have a reserved car. Visit here to reserve now <a asp-action="Index" asp-controller="Car">Our Cars</a> </h4>
+                    <h4>@Localizer["You do not have a reserved car. Visit here to reserve now"] <a asp-action="Index" asp-controller="Car">@Localizer["Our Cars"]</a> </h4>
                 }
                 else
                 {
-                    <h4>Your reserved car.</h4>
+                    <h4>@Localizer["Your reserved car."]</h4>
                 }
             </div>
         </div>
@@ -35,31 +35,31 @@
                             </div>
                             <ul class="specs">
                                 <li>
-                                    <span>Engine</span>
+                                    <span>@Html.DisplayNameFor(x => x.Car.Engine)</span>
                                     <span class="spec">@Model.Car.Engine.EngineHorsePower hp @Model.Car.Engine.EngineVolume cm³</span>
                                 </li>
                                 <li>
-                                    <span>Fuel</span>
-                                    <span class="spec">@Model.Car.Engine.EngineFuelType</span>
+                                    <span>@Html.DisplayNameFor(x => x.Car.Engine.EngineFuelType)</span>
+                                    <span class="spec">@Html.DisplayFor(x => x.Car.Engine.EngineFuelType)</span>
                                 </li>
                                 <li>
-                                    <span>Transmission</span>
-                                    <span class="spec">@Model.Car.CarTransmissionType</span>
+                                    <span>@Html.DisplayNameFor(x => x.Car.CarTransmissionType)</span>
+                                    <span class="spec">@Html.DisplayFor(x => x.Car.CarTransmissionType)</span>
                                 </li>
                                 <li>
-                                    <span>Trim</span>
+                                    <span>@Html.DisplayNameFor(x => x.Car.CarTrimPackage)</span>
                                     <span class="spec">@Model.Car.CarTrimPackage</span>
                                 </li>
                                 <li>
-                                    <span>Type</span>
+                                    <span>@Html.DisplayNameFor(x => x.Car.CarType)</span>
                                     <span class="spec">@Model.Car.CarType</span>
                                 </li>
                                 <li>
-                                    <span>Year</span>
+                                    <span>@Html.DisplayNameFor(x => x.Car.CarProductYear)</span>
                                     <span class="spec">@Model.Car.CarProductYear</span>
                                 </li>
                                 <li>
-                                    <span>Minimum Age</span>
+                                    <span>@Html.DisplayNameFor(x => x.Car.MinimumAge)</span>
                                     <span class="spec">@Model.Car.MinimumAge</span>
                                 </li>
                             </ul>
@@ -70,46 +70,46 @@
                     <div class="item-1">
                         <div class="item-1-contents">
                             <div class="text-center">
-                                <h3>Rent Details</h3>
+                                <h3>@Localizer["Rent Details"]</h3>
                             </div>
                             <ul class="specs">
                                 <li>
-                                    <span>Rent Office</span>
+                                    <span>@Localizer["Rent Office"]</span>
                                     <span class="spec">@Model.Car.Office.Address.District.Province.ProvinceName - @Model.Car.Office.Address.District.DistrictName</span>
                                 </li>
                                 <li>
-                                    <span>Rent Date</span>
+                                    <span>@Localizer["Rent Date"]</span>
                                     <span class="spec">@Model.ReservationDate</span>
                                 </li>
                                 <li>
-                                    <span>Return Office</span>
+                                    <span>@Localizer["Return Office"]</span>
                                     <span class="spec">@Model.ReturnOffice.Address.District.DistrictName - @Model.ReturnOffice.Address.District.Province.ProvinceName</span>
                                 </li>
                                 <li>
-                                    <span>Return Date</span>
+                                    <span>@Localizer["Return Date"]</span>
                                     <span class="spec">@Model.ReturnDate</span>
                                 </li>
                                 <li>
-                                    <span>Days</span>
+                                    <span>@Html.DisplayNameFor(x => x.Days)</span>
                                     <span class="spec">@Model.Days</span>
                                 </li>
                                 <li>
-                                    <span>Deposit</span>
+                                    <span>@Html.DisplayNameFor(x => x.Car.CarDepositPrice)</span>
                                     <span class="spec">@Model.Car.CarDepositPrice₺</span>
                                 </li>
                                 <li>
-                                    <span>Daily Price</span>
+                                    <span>@Html.DisplayNameFor(x => x.Car.CarRentPrice)</span>
                                     <span class="spec">@Model.Car.CarRentPrice₺</span>
                                 </li>
                                 <li>
-                                    <span>Total Price</span>
+                                    <span>@Html.DisplayNameFor(x => x.TotalPrice)</span>
                                     <span class="spec">@Model.TotalPrice₺</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="d-flex action mt-5 float-right">
-                        <a asp-action="EndReservation" asp-controller="Reservation" asp-route-id="@Model.ReservationId" class="btn btn-primary pl-5 pr-5 pt-3 pb-3">End Reservation</a>
+                        <a asp-action="EndReservation" asp-controller="Reservation" asp-route-id="@Model.ReservationId" class="btn btn-primary pl-5 pr-5 pt-3 pb-3">@Localizer["End Reservation"]</a>
                     </div>
                 </div>
             </div>

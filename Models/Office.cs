@@ -18,12 +18,12 @@ namespace CarRent.Models
         public string OfficeName { get; set; }
 
         [Required]
-        [Display(Name = "Office Phone Number")]
+        [Display(Name = "Phone Number")]
         [Phone(ErrorMessage = "The phone number does not conform to the format.")]
         public string OfficePhone { get; set; }
 
         [Required]
-        [Display(Name = "Office E-mail Address")]
+        [Display(Name = "E-mail Address")]
         [EmailAddress(ErrorMessage = "The e-mail address does not conform to the format.")]
         public string OfficeEmailAddress { get; set; }
 

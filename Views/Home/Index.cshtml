@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Welcome";
+    ViewData["Title"] = Localizer["Welcome"];
     List<Car> cars = ViewData["Cars"] as List<Car>;
 }
 
@@ -10,8 +10,8 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12 no-cars">
-                        <h2>There Are No Cars</h2>
-                        <h4>There are no cars in the database</h4>
+                        <h2>@Localizer["There Are No Cars"]</h2>
+                        <h4>@Localizer["There are no cars in the database."]</h4>
                     </div>
                 </div>
             </div>
@@ -27,29 +27,29 @@
                             <h3>@cars.FirstOrDefault().CarBrand @cars.FirstOrDefault().CarModel @cars.FirstOrDefault().CarTrimPackage</h3>
                             <ul class="list-unstyled">
                                 <li>
-                                    <span>Office</span>
+                                    <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().Office.OfficeId)</span>
                                     <span class="spec">@cars.FirstOrDefault().Office.Address.District.Province.ProvinceName - @cars.FirstOrDefault().Office.Address.District.DistrictName</span>
                                 </li>
                                 <li>
-                                    <span>Engine</span>
+                                    <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().Engine.EngineId)</span>
                                     <span class="spec">@cars.FirstOrDefault().Engine.EngineHorsePower hp @cars.FirstOrDefault().Engine.EngineVolume cm³</span>
                                 </li>
                                 <li>
-                                    <span>Fuel</span>
-                                    <span class="spec">@cars.FirstOrDefault().Engine.EngineFuelType</span>
+                                    <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().Engine.EngineFuelType)</span>
+                                    <span class="spec">@Html.DisplayFor(x => cars.FirstOrDefault().Engine.EngineFuelType)</span>
                                 </li>
                                 <li>
-                                    <span>Transmission</span>
-                                    <span class="spec">@cars.FirstOrDefault().CarTransmissionType</span>
+                                    <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().CarTransmissionType)</span>
+                                    <span class="spec">@Html.DisplayFor(x => cars.FirstOrDefault().CarTransmissionType)</span>
                                 </li>
                                 <li>
-                                    <span>Minium age</span>
+                                    <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().MinimumAge)</span>
                                     <span class="spec">@cars.FirstOrDefault().MinimumAge</span>
                                 </li>
                             </ul>
                             <div class="d-flex align-items-center bg-light p-3">
-                                <span>@cars.FirstOrDefault().CarRentPrice₺/day + @cars.FirstOrDefault().CarDepositPrice₺ deposit</span>
-                                <a asp-action="FastReservation" asp-controller="Reservation" asp-route-id="@cars.FirstOrDefault().CarId" class="ml-auto btn btn-primary">Rent Now</a>
+                                <span>@cars.FirstOrDefault().CarRentPrice₺/@Localizer["day"] + @cars.FirstOrDefault().CarDepositPrice₺ @Localizer["deposit"]</span>
+                                <a asp-action="FastReservation" asp-controller="Reservation" asp-route-id="@cars.FirstOrDefault().CarId" class="ml-auto btn btn-primary">@Localizer["Rent Now"]</a>
                             </div>
                         </div>
                     </div>
@@ -59,184 +59,156 @@
     }
 </div>
 
-        <div class="site-section pt-0 pb-0 bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
+<div class="site-section pt-0 pb-0 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
 
-                        <form class="trip-form" method="post" asp-action="List" asp-controller="Car">
-                            <div class="row align-items-center mb-4">
-                                <div class="col-md-6">
-                                    <h3 class="m-0">Begin your trip here</h3>
+                <form class="trip-form" method="get" asp-action="List" asp-controller="Car">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-6">
+                            <h3 class="m-0">@Localizer["Begin your trip here"]</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="cf-1">@Localizer["Where you from"]</label>
+                            <select type="text" id="cf-1" name="RentPlace" asp-items="ViewBag.ProvinceDistrict" class="form-control" required>
+                                <option value="">@Localizer["Your pickup address"]</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cf-2">@Localizer["Where you go"]</label>
+                            <select type="text" id="cf-2" name="ReturnPlace" class="form-control" asp-items="ViewBag.ProvinceDistrict" required>
+                                <option value="">@Localizer["Your drop-off address"]</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cf-3">
+                                @Localizer["Journey date"]
+                            </label>
+                            <input type="datetime-local" id="cf-3" name="RentDate" class="form-control px-3" required min="@DateTime.Now.AddMinutes(10).ToString("yyyy-MM-ddTHH:mm")">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cf-4">@Localizer["Return date"]</label>
+                            <input type="datetime-local" id="cf-4" name="ReturnDate" class="form-control px-3" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="submit" value="@Localizer["Begin Trip"]" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <h3>@Localizer["Our Offers"]</h3>
+                <p class="mb-4">@Localizer["We have listed our vehicles that you can rent right away for you."]</p>
+                <p>
+                    <a href="#" class="btn btn-primary custom-prev">@Localizer["Previous"]</a>
+                    <span class="mx-2">/</span>
+                    <a href="#" class="btn btn-primary custom-next">@Localizer["Next"]</a>
+                </p>
+            </div>
+            <div class="col-lg-9">
+                <div class="nonloop-block-13 owl-carousel">
+                    @foreach (var item in cars)
+                    {
+                        <div class="item-1">
+                            <img src="@item.CarImageUrl" alt="Image" class="img-fluid bg-white">
+                            <div class="item-1-contents">
+                                <div class="text-center">
+                                    <h3>@item.CarBrand @item.CarModel @item.CarTrimPackage</h3>
+                                    <div class="rent-price"><span>@item.CarRentPrice₺/</span>day + @item.CarDepositPrice₺ deposit</div>
+                                </div>
+                                <ul class="specs">
+                                    <li>
+                                        <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().Office.OfficeId)</span>
+                                        <span class="spec">@item.Office.Address.District.Province.ProvinceName - @item.Office.Address.District.DistrictName</span>
+                                    </li>
+                                    <li>
+                                        <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().Engine.EngineId)</span>
+                                        <span class="spec">@item.Engine.EngineHorsePower hp @item.Engine.EngineVolume cm³</span>
+                                    </li>
+                                    <li>
+                                        <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().Engine.EngineFuelType)</span>
+                                        <span class="spec">@Html.DisplayFor(x => item.Engine.EngineFuelType)</span>
+                                    </li>
+                                    <li>
+                                        <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().CarTransmissionType)</span>
+                                        <span class="spec">@Html.DisplayFor(x => item.CarTransmissionType)</span>
+                                    </li>
+                                    <li>
+                                        <span>@Html.DisplayNameFor(x => cars.FirstOrDefault().MinimumAge)</span>
+                                        <span class="spec">@item.MinimumAge</span>
+                                    </li>
+                                </ul>
+                                <div class="d-flex action">
+                                    <a asp-action="FastReservation" asp-controller="Reservation" asp-route-id="@item.CarId" class="btn btn-primary">@Localizer["Rent Now"]</a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-md-3">
-                                    <label for="cf-1">Where you from</label>
-                                    <select type="text" id="cf-1" name="RentPlace" asp-items="ViewBag.ProvinceDistrict" class="form-control" required>
-                                        <option value="">Your pickup address</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="cf-2">Where you go</label>
-                                    <select type="text" id="cf-2" name="ReturnPlace" class="form-control" asp-items="ViewBag.ProvinceDistrict" required>
-                                        <option value="">Your drop-off address</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="cf-3">Journey date</label>
-                                    <input type="datetime-local" id="cf-3" name="RentDate" class="form-control px-3" required min="@DateTime.Now.AddMinutes(10).ToString("yyyy-MM-ddTHH:mm")">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="cf-4">Return date</label>
-                                    <input type="datetime-local" id="cf-4" name="ReturnDate" class="form-control px-3" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <input type="submit" value="Begin Trip" class="btn btn-primary">
-                                </div>
-                            </div>
-                        </form>
+                        </div>
+                    }
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="site-section section-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="text-white">@Localizer["Our Services"]</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="service-1">
+                    <span class="service-1-icon">
+                        <span class="flaticon-car-1"></span>
+                    </span>
+                    <div class="service-1-contents">
+                        <h3>@Localizer["Periodic Maintenance"]</h3>
+                        <p>@Localizer["CarRent offers periodic maintenance for your fleet."]
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="service-1">
+                    <span class="service-1-icon">
+                        <span class="flaticon-traffic"></span>
+                    </span>
+                    <div class="service-1-contents">
+                        <h3>@Localizer["Car Accessories"]</h3>
+                        <p>@Localizer["CarRent offers accessories for all types of vehicles."]</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="service-1">
+                    <span class="service-1-icon">
+                        <span class="flaticon-valet"></span>
+                    </span>
+                    <div class="service-1-contents">
+                        <h3>@Localizer["Own a Car"]</h3>
+                        <p>@Localizer["CarRent offers you the opportunity to own a car."]</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <div class="site-section bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <h3>Our Offer</h3>
-                        <p class="mb-4">We have listed our vehicles that you can rent right away for you.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary custom-prev">Previous</a>
-                            <span class="mx-2">/</span>
-                            <a href="#" class="btn btn-primary custom-next">Next</a>
-                        </p>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="nonloop-block-13 owl-carousel">
-                            @foreach (var item in cars)
-                            {
-                                <div class="item-1">
-                                    <img src="@item.CarImageUrl" alt="Image" class="img-fluid bg-white">
-                                    <div class="item-1-contents">
-                                        <div class="text-center">
-                                            <h3>@item.CarBrand @item.CarModel @item.CarTrimPackage</h3>
-                                            <div class="rent-price"><span>@item.CarRentPrice₺/</span>day + @item.CarDepositPrice₺ deposit</div>
-                                        </div>
-                                        <ul class="specs">
-                                            <li>
-                                                <span>Office</span>
-                                                <span class="spec">@item.Office.Address.District.Province.ProvinceName - @item.Office.Address.District.DistrictName</span>
-                                            </li>
-                                            <li>
-                                                <span>Engine</span>
-                                                <span class="spec">@item.Engine.EngineHorsePower hp @item.Engine.EngineVolume cm³</span>
-                                            </li>
-                                            <li>
-                                                <span>Fuel</span>
-                                                <span class="spec">@item.Engine.EngineFuelType</span>
-                                            </li>
-                                            <li>
-                                                <span>Transmission</span>
-                                                <span class="spec">@item.CarTransmissionType</span>
-                                            </li>
-                                            <li>
-                                                <span>Minimum Age</span>
-                                                <span class="spec">@item.MinimumAge</span>
-                                            </li>
-                                        </ul>
-                                        <div class="d-flex action">
-                                            <a asp-action="FastReservation" asp-controller="Reservation" asp-route-id="@item.CarId" class="btn btn-primary">Rent Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="site-section section-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center mb-5">
-                        <h2 class="text-white">Our Services</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="service-1">
-                            <span class="service-1-icon">
-                                <span class="flaticon-car-1"></span>
-                            </span>
-                            <div class="service-1-contents">
-                                <h3>Periodic Maintenance</h3>
-                                <p>CarRent offers periodic maintenance for your fleet.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="service-1">
-                            <span class="service-1-icon">
-                                <span class="flaticon-traffic"></span>
-                            </span>
-                            <div class="service-1-contents">
-                                <h3>Car Accessories</h3>
-                                <p>CarRent offers accessories for all types of vehicles.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="service-1">
-                            <span class="service-1-icon">
-                                <span class="flaticon-valet"></span>
-                            </span>
-                            <div class="service-1-contents">
-                                <h3>Own a Car</h3>
-                                <p>CarRent offers you the opportunity to own a car.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="container site-section mb-5">
-            <div class="row justify-content-center text-center">
-                <div class="col-7 text-center mb-5">
-                    <h2>How it works</h2>
-                    <p>Our car rental process is as shown below.</p>
-                </div>
-            </div>
-            <div class="how-it-works d-flex">
-                <div class="step">
-                    <span class="number current-number"><span>01</span></span>
-                    <span class="caption">Time &amp; Place</span>
-                </div>
-                <div class="step">
-                    <span class="number"><span>02</span></span>
-                    <span class="caption ">Car</span>
-                </div>
-                <div class="step">
-                    <span class="number"><span>03</span></span>
-                    <span class="caption">Details</span>
-                </div>
-                <div class="step">
-                    <span class="number"><span>04</span></span>
-                    <span class="caption">Checkout</span>
-                </div>
-                <div class="step">
-                    <span class="number"><span>05</span></span>
-                    <span class="caption">Done</span>
-                </div>
-            </div>
-        </div>
+<partial name="_HowItWorksPartial" />

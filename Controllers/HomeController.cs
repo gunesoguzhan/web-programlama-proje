@@ -1,5 +1,7 @@
 ﻿using CarRent.Data;
 using CarRent.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +49,28 @@ namespace CarRent.Controllers
             ViewData["Cars"] = cars;
 
             return View();
+        }
+
+        public IActionResult En()
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("en-US")),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMonths(1) }
+            );
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Tr()
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("tr-TR")),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddMonths(1) }
+            );
+
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

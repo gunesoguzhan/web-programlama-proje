@@ -49,7 +49,7 @@ namespace CarRent.Models
         public double CarRentPrice { get; set; }
 
         [Required]
-        [Display(Name = "Deposit Price")]
+        [Display(Name = "Deposit")]
         [Range(0, double.MaxValue)]
         public double CarDepositPrice { get; set; }
 
@@ -63,7 +63,7 @@ namespace CarRent.Models
         public string CarCoverImageUrl { get; set; }
 
         [Required]
-        [Display(Name = "Gearbox")]
+        [Display(Name = "Transmission")]
         public CarTransmissionType CarTransmissionType { get; set; }
 
         public int EngineId { get; set; }
@@ -92,8 +92,11 @@ namespace CarRent.Models
 
     public enum CarTransmissionType
     {
+        [Display(Name = "Manual")]
         Manual,
+        [Display(Name = "Automatic")]
         Automatic,
+        [Display(Name = "Semi Automatic")]
         Semi
     }
 }

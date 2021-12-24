@@ -2,7 +2,7 @@
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
-    ViewData["Title"] = "Our Cars For You";
+    ViewData["Title"] = Localizer["Our Cars For You"];
     Reservation reservation = HttpContextAccessor.HttpContext.Session.GetObject<Reservation>("Reservation");
 }
 
@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-6 text-center">
-                    <h1>Our Cars For You</h1>
+                    <h1>@ViewData["Title"]</h1>
                     <p>We list our suitable cars for you.</p>
                 </div>
             </div>
@@ -30,28 +30,28 @@
                         <div class="item-1-contents">
                             <div class="text-center">
                                 <h3>@item.CarBrand @item.CarModel @item.CarTrimPackage</h3>
-                                <div class="rent-price"><span>@(item.CarRentPrice * reservation.Days)₺</span> + @(item.CarDepositPrice)₺ deposit</div>
+                                <div class="rent-price"><span>@(item.CarRentPrice * reservation.Days)₺</span> + @(item.CarDepositPrice)₺ @Localizer["deposit"]</div>
                             </div>
                             <ul class="specs">
                                 <li>
-                                    <span>Engine</span>
+                                    <span>@Html.DisplayNameFor(x => x.Engine)</span>
                                     <span class="spec">@item.Engine.EngineHorsePower hp @item.Engine.EngineVolume cm³</span>
                                 </li>
                                 <li>
-                                    <span>Fuel</span>
-                                    <span class="spec">@item.Engine.EngineFuelType</span>
+                                    <span>@Html.DisplayNameFor(x => x.Engine.EngineFuelType)</span>
+                                    <span class="spec">@Html.DisplayFor(x => item.Engine.EngineFuelType)</span>
                                 </li>
                                 <li>
-                                    <span>Transmission</span>
-                                    <span class="spec">@item.CarTransmissionType</span>
+                                    <span>@Html.DisplayNameFor(x => x.CarTransmissionType)</span>
+                                    <span class="spec">@Html.DisplayFor(x => item.CarTransmissionType)</span>
                                 </li>
                                 <li>
-                                    <span>Minium age</span>
+                                    <span>@Html.DisplayNameFor(x => x.MinimumAge)</span>
                                     <span class="spec">@item.MinimumAge</span>
                                 </li>
                             </ul>
                             <div class="d-flex action">
-                                <a asp-action="Reserve" asp-controller="Reservation" asp-route-id="@item.CarId" class="btn btn-primary">Rent Now</a>
+                                <a asp-action="Reserve" asp-controller="Reservation" asp-route-id="@item.CarId" class="btn btn-primary">@Localizer["Rent Now"]</a>
                             </div>
                         </div>
                     </div>
@@ -62,33 +62,4 @@
     </div>
 </div>
 
-<div class="container site-section mb-5">
-    <div class="row justify-content-center text-center">
-        <div class="col-7 text-center mb-5">
-            <h2>How it works</h2>
-            <p>Our car rental process is as shown below.</p>
-        </div>
-    </div>
-    <div class="how-it-works d-flex">
-        <div class="step">
-            <span class="number"><span>01</span></span>
-            <span class="caption">Time &amp; Place</span>
-        </div>
-        <div class="step">
-            <span class="number current-number"><span>02</span></span>
-            <span class="caption ">Car</span>
-        </div>
-        <div class="step">
-            <span class="number"><span>03</span></span>
-            <span class="caption">Details</span>
-        </div>
-        <div class="step">
-            <span class="number"><span>04</span></span>
-            <span class="caption">Checkout</span>
-        </div>
-        <div class="step">
-            <span class="number"><span>05</span></span>
-            <span class="caption">Done</span>
-        </div>
-    </div>
-</div>
+<partial name="_HowItWorksPartial" />

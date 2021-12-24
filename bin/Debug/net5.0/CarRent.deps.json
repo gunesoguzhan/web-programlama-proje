@@ -320,6 +320,11 @@
         "runtime": {
           "CarRent.dll": {}
         },
+        "resources": {
+          "tr/CarRent.resources.dll": {
+            "locale": "tr"
+          }
+        },
         "compile": {
           "CarRent.dll": {}
         }

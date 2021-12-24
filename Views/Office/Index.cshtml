@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CarRent.Models.Office>
 
 @{
-    ViewData["Title"] = "Our Offices";
+    ViewData["Title"] = Localizer["Our Offices"];
 }
 
 <div class="ftco-blocks-cover-1">
@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-6 text-center">
-                    <h1>Our Offices</h1>
+                    <h1>@ViewData["Title"]</h1>
                 </div>
             </div>
         </div>
@@ -29,20 +29,20 @@
                             </div>
                             <ul class="specs">
                                 <li>
-                                    <span class="spec2">Address</span>
+                                    <span class="spec2">@Html.DisplayNameFor(x => x.Address.AddressId)</span>
                                     <span class="spec spec2">@item.Address.AddressText</span>
                                 </li>
                                 <li>
-                                    <span class="spec2">Phone</span>
+                                    <span class="spec2">@Html.DisplayNameFor(x => x.OfficePhone)</span>
                                     <span class="spec spec2">@item.OfficePhone</span>
                                 </li>
                                 <li>
-                                    <span class="spec2">E-mail</span>
+                                    <span class="spec2">@Html.DisplayNameFor(x => x.OfficeEmailAddress)</span>
                                     <span class="spec spec2">@item.OfficeEmailAddress</span>
                                 </li>
                             </ul>
                             <div class="d-flex action">
-                                <a asp-action="Details" asp-controller="Office" asp-route-id="@item.OfficeId" class="btn btn-primary">Details</a>
+                                <a asp-action="Details" asp-controller="Office" asp-route-id="@item.OfficeId" class="btn btn-primary">@Localizer["Details"]</a>
                             </div>
                         </div>
                     </div>

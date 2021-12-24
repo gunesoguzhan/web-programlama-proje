@@ -1,7 +1,7 @@
 ﻿@model CarRent.Models.Reservation
 
 @{
-    ViewData["Title"] = "Fast Reservation";
+    ViewData["Title"] = Localizer["Fast Reservation"];
 }
 
 <div class="padding-top-120px bg-dark"></div>
@@ -15,31 +15,31 @@
                     <div class="item-1-contents">
                         <div class="text-center">
                             <h3>@Model.Car.CarBrand @Model.Car.CarModel</h3>
-                            <div class="rent-price"><span>@Model.Car.CarRentPrice₺/</span>day + @Model.Car.CarDepositPrice₺ deposit</div>
+                            <div class="rent-price"><span>@Model.Car.CarRentPrice₺/</span>@Localizer["day"] + @Model.Car.CarDepositPrice₺ @Localizer["deposit"]</div>
                         </div>
                         <ul class="specs">
                             <li>
-                                <span>Office</span>
+                                <span>@Html.DisplayNameFor(x => x.Car.Office)</span>
                                 <span class="spec">@Model.Car.Office.Address.District.Province.ProvinceName - @Model.Car.Office.Address.District.DistrictName</span>
                             </li>
                             <li>
-                                <span>Engine</span>
+                                <span>@Html.DisplayNameFor(x => x.Car.Engine)</span>
                                 <span class="spec">@Model.Car.Engine.EngineHorsePower hp @Model.Car.Engine.EngineVolume cm³</span>
                             </li>
                             <li>
-                                <span>Fuel</span>
-                                <span class="spec">@Model.Car.Engine.EngineFuelType</span>
+                                <span>@Html.DisplayNameFor(x => x.Car.Engine.EngineFuelType)</span>
+                                <span class="spec">@Html.DisplayFor(x => x.Car.Engine.EngineFuelType)</span>
                             </li>
                             <li>
-                                <span>Transmission</span>
-                                <span class="spec">@Model.Car.CarTransmissionType</span>
+                                <span>@Html.DisplayNameFor(x => x.Car.CarTransmissionType)</span>
+                                <span class="spec">@Html.DisplayFor(x => x.Car.CarTransmissionType)</span>
                             </li>
                             <li>
-                                <span>Trim</span>
+                                <span>@Html.DisplayNameFor(x => x.Car.CarTrimPackage)</span>
                                 <span class="spec">@Model.Car.CarTrimPackage</span>
                             </li>
                             <li>
-                                <span>Minimum Age</span>
+                                <span>@Html.DisplayNameFor(x => x.Car.MinimumAge)</span>
                                 <span class="spec">@Model.Car.MinimumAge</span>
                             </li>
                         </ul>
@@ -56,31 +56,31 @@
         <div class="row">
             <div class="col-12">
 
-                <form class="trip-form" method="post" asp-action="FastReserve" asp-controller="Reservation">
+                <form class="trip-form" method="get" asp-action="FastReserve" asp-controller="Reservation">
                     <div class="row align-items-center mb-4">
                         <div class="col-md-6">
-                            <h3 class="m-0">Begin your trip here</h3>
+                            <h3 class="m-0">@Localizer["Begin your trip here"]</h3>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="cf-2">Where you go</label>
+                            <label for="cf-2">@Localizer["Where you go"]</label>
                             <select type="text" id="cf-2" name="ReturnPlace" class="form-control" asp-items="ViewBag.ProvinceDistrict" required>
-                                <option value="">Your drop-off address</option>
+                                <option value="">@Localizer["Your drop-off address"]</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="cf-3">Journey date</label>
+                            <label for="cf-3">@Localizer["Journey date"]</label>
                             <input type="datetime-local" id="cf-3" name="RentDate" placeholder="Your pickup address" class="form-control px-3" required min="@DateTime.Now.AddMinutes(10).ToString("yyyy-MM-ddTHH:mm")">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="cf-4">Return date</label>
+                            <label for="cf-4">@Localizer["Return date"]</label>
                             <input type="datetime-local" id="cf-4" name="ReturnDate" placeholder="Your pickup address" class="form-control px-3" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <input type="submit" value="Confirm" class="btn btn-primary">
+                            <input type="submit" value="@Localizer["Confirm"]" class="btn btn-primary">
                         </div>
                     </div>
                 </form>
@@ -89,34 +89,4 @@
     </div>
 </div>
 
-<div class="container site-section mb-5">
-    <div class="row justify-content-center text-center">
-        <div class="col-7 text-center mb-5">
-            <h2>How it works</h2>
-            <p>Our fast car rental process is as shown below.</p>
-        </div>
-    </div>
-    <div class="how-it-works d-flex">
-        <div class="step">
-            <span class="number"><span>01</span></span>
-            <span class="caption">Car</span>
-        </div>
-        <div class="step">
-            <span class="number current-number"><span>02</span></span>
-            <span class="caption">Time &amp; Place</span>
-        </div>
-        <div class="step">
-            <span class="number"><span>03</span></span>
-            <span class="caption">Details</span>
-        </div>
-        <div class="step">
-            <span class="number"><span>04</span></span>
-            <span class="caption">Checkout</span>
-        </div>
-        <div class="step">
-            <span class="number"><span>05</span></span>
-            <span class="caption">Done</span>
-        </div>
-
-    </div>
-</div>
+<partial name="_HowItWorksPartial"/>
