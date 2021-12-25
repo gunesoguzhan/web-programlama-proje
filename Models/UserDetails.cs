@@ -18,11 +18,6 @@ namespace CarRent.Models
         [Display(Name = "Surname")]
         public string Surname { get; set; }
 
-        public int? AddressId { get; set; }
-
-        [ForeignKey("AddressId")]
-        public Address Address { get; set; }
-
         public UserStatisticDetails UserStatistics { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }
