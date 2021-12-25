@@ -19,6 +19,16 @@ Bu repo G181210068 numaralı Oğuzhan Güneş'in Web Programlama Proje ödevini 
 <br/><br/>
 ![CarRent index page](/github-img/index-full.jpeg "CarRent index page")
 <br/><br/>
+## İlk Çalıştırma
+### Program ilk kez çalıştırılacağında yapılacaklar:
+1. Veritabanının oluşturulması için ilk olarak connection string uygun şekilde ayarlanmalıdır.
+2. Package Manager Console kullanılarak Update-Database işlemi yapılmalıdır.
+<!-- -->
+Bu işlemler yapıldığında veritabanı oluşturulup gerekli veriler veritabanına eklenecektir (data seeding).<br/>
+### Admin hesabının:
+- kullanıcı adı: g181210068@sakarya.edu.tr
+- şifresi: 123
+<br/><br/>
 ## Lisans Bilgileri (License):
 Bu projede kullanılan template ve görsellerin kullanımı eğitim amaçlıdır. Ticari amaçlarla kullanılmamıştır.
 <br/>
